@@ -1,15 +1,21 @@
 from bd.conexion import crear_conexion
 
 
-def contar_registros(tabla): #funcion para contar registros de cualquier tabla de la base de datos 
+def contar_registros(
+    tabla,
+):  # funcion para contar registros de cualquier tabla de la base de datos
     """Devuelve el total de filas de una tabla. Devuelve 0 si falla o la tabla no existe."""
     conexion = crear_conexion()
     if conexion is None:
         return 0
     try:
         cursor = conexion.cursor()
-        cursor.execute(f"SELECT COUNT(*) FROM `{tabla}`") #ejecución de la consulta para cualquier tabla, las `` sirven para evitar errores de nombres
-        resultado = cursor.fetchone() #esto sirve para traer solo una fila (es decir cuenta el numero de registros de la tabla y lo devuelve como número)
+        cursor.execute(
+            f"SELECT COUNT(*) FROM `{tabla}`"
+        )  # ejecución de la consulta para cualquier tabla, las `` sirven para evitar errores de nombres
+        resultado = (
+            cursor.fetchone()
+        )  # esto sirve para traer solo una fila (es decir cuenta el numero de registros de la tabla y lo devuelve como número)
         return resultado[0] if resultado else 0
     except Exception:
         return 0
@@ -77,8 +83,11 @@ def insertar_lead(
         if conexion is not None and conexion.is_connected():
             conexion.close()
 
-#MÉTODO para que permita realizar un update a los datos de la tabla leads
-def actualizar_lead(id_lead, nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto):
+
+# MÉTODO para que permita realizar un update a los datos de la tabla leads
+def actualizar_lead(
+    id_lead, nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto
+):
     """Actualiza los datos de un lead existente por su id."""
     conexion = crear_conexion()
     if conexion is None:
@@ -92,7 +101,16 @@ def actualizar_lead(id_lead, nombre, empresa, telefono, email, fuente_captacion,
                 fuente_captacion = %s, estado = %s, fecha_contacto = %s
             WHERE id_lead = %s
         """
-        valores = (nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto, id_lead)
+        valores = (
+            nombre,
+            empresa,
+            telefono,
+            email,
+            fuente_captacion,
+            estado,
+            fecha_contacto,
+            id_lead,
+        )
         cursor.execute(sql, valores)
         conexion.commit()
         return cursor.rowcount > 0  # True si se actualizó al menos 1 fila
@@ -105,7 +123,8 @@ def actualizar_lead(id_lead, nombre, empresa, telefono, email, fuente_captacion,
         if conexion is not None and conexion.is_connected():
             conexion.close()
 
-#MÉTODO para interpretar el delete y así poder borrar los datos de un lead
+
+# MÉTODO para interpretar el delete y así poder borrar los datos de un lead
 def eliminar_lead(id_lead):
     """Elimina un lead de la base de datos por su id."""
     conexion = crear_conexion()

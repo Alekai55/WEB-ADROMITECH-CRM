@@ -104,11 +104,12 @@
                             <button class="btn-eliminar btn btn-xs" title="Eliminar lead"
                                 style="background-color: #dc2626; color: #fff; border: none; padding: 4px 8px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="3 6 5 6 21 6"/>
-                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                                    <path d="M10 11v6M14 11v6"/>
-                                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                                    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6" />
+                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                                    <path d="M10 11v6M14 11v6" />
+                                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
                                 </svg>
                             </button>
                         </td>
@@ -131,8 +132,7 @@
 
             <!-- ── Cabecera ── -->
             <div class="px-8 py-5" style="background-color: var(--color-oscuro); border-radius: 1rem 1rem 0 0;">
-                <h3 class="titulo-seccion"
-                    style="font-size: 1.4rem;color: var(--color-acento);">
+                <h3 class="titulo-seccion" style="font-size: 1.4rem;color: var(--color-acento);">
                     Nuevo Lead
                 </h3>
                 <p style="color: var(--color-gris-texto); font-size: 0.85rem; margin-top: 2px;">
@@ -261,6 +261,7 @@
             outline: 2px solid var(--color-acento);
             border-color: var(--color-acento);
         }
+
         #form-editar-lead input:focus,
         #form-editar-lead select:focus {
             outline: 2px solid var(--color-acento);
@@ -269,6 +270,7 @@
 
         /* En móvil: colapsar a 1 columna */
         @media (max-width: 640px) {
+
             #form-nuevo-lead>div[style*="grid-template-columns: 1fr 1fr"],
             #form-editar-lead>div[style*="grid-template-columns: 1fr 1fr"] {
                 grid-template-columns: 1fr !important;
@@ -283,12 +285,10 @@
 
             <!-- Cabecera -->
             <div class="px-8 py-5" style="background-color: var(--color-oscuro); border-radius: 1rem 1rem 0 0;">
-                <h3 class="titulo-seccion"
-                    style="font-size: 1.4rem;color: var(--color-acento);">
+                <h3 class="titulo-seccion" style="font-size: 1.4rem;color: var(--color-acento);">
                     Editar Lead
                 </h3>
-                <p style="color: var(--color-gris-texto); font-size: 0.85rem; margin-top: 2px;"
-                >
+                <p style="color: var(--color-gris-texto); font-size: 0.85rem; margin-top: 2px;">
                     Modifica los datos del contacto seleccionado
                 </p>
             </div>
@@ -301,7 +301,9 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Nombre *</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Nombre
+                                *</span>
                         </label>
                         <input id="e-nombre" type="text" placeholder="Nombre completo"
                             class="input input-bordered w-full" required
@@ -309,11 +311,11 @@
                     </div>
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Empresa</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Empresa</span>
                         </label>
                         <input id="e-empresa" type="text" placeholder="Nombre de la empresa"
-                            class="input input-bordered w-full"
-                            style="border-color: var(--color-oscuro-suave);">
+                            class="input input-bordered w-full" style="border-color: var(--color-oscuro-suave);">
                     </div>
                 </div>
 
@@ -321,19 +323,19 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Teléfono</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Teléfono</span>
                         </label>
                         <input id="e-telefono" type="tel" maxlength="9" placeholder="600 000 000"
-                            class="input input-bordered w-full"
-                            style="border-color: var(--color-oscuro-suave);">
+                            class="input input-bordered w-full" style="border-color: var(--color-oscuro-suave);">
                     </div>
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Email</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Email</span>
                         </label>
                         <input id="e-email" type="email" placeholder="correo@ejemplo.com"
-                            class="input input-bordered w-full"
-                            style="border-color: var(--color-oscuro-suave);">
+                            class="input input-bordered w-full" style="border-color: var(--color-oscuro-suave);">
                     </div>
                 </div>
 
@@ -341,7 +343,8 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Captación</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Captación</span>
                         </label>
                         <select id="e-captacion" class="select select-bordered w-full"
                             style="border-color: var(--color-oscuro-suave);">
@@ -356,7 +359,8 @@
                     </div>
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Estado</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Estado</span>
                         </label>
                         <select id="e-estado" class="select select-bordered w-full"
                             style="border-color: var(--color-oscuro-suave);">
@@ -372,7 +376,9 @@
                 <!-- Fila 4: Fecha -->
                 <div class="form-control">
                     <label class="label pb-1">
-                        <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Fecha de contacto</span>
+                        <span class="label-text font-bold"
+                            style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Fecha
+                            de contacto</span>
                     </label>
                     <input id="e-fecha" type="date" class="input input-bordered w-full"
                         style="border-color: var(--color-oscuro-suave);">
@@ -519,26 +525,26 @@
         });
 
         // ===== Lógica del Modal de EDICIÓN =====
-        const modalEditar   = document.getElementById("modal-editar-lead");
-        const formEditar    = document.getElementById("form-editar-lead");
+        const modalEditar = document.getElementById("modal-editar-lead");
+        const formEditar = document.getElementById("form-editar-lead");
         const btnCerrarEdit = document.getElementById("btn-cerrar-editar");
         const mensajeEditar = document.getElementById("editar-mensaje");
 
         // Delegación de evento: click en cualquier botón-lápiz de la tabla
-        document.getElementById("listado-leads").addEventListener("click", function(e) {
+        document.getElementById("listado-leads").addEventListener("click", function (e) {
             const btnEditar = e.target.closest(".btn-editar");
             if (!btnEditar) return;
 
             // Recuperamos el id del lead desde la fila
             const fila = btnEditar.closest("tr");
-            document.getElementById("e-id").value        = fila.dataset.idLead;
-            document.getElementById("e-nombre").value    = fila.querySelector(".nombre-lead").textContent;
-            document.getElementById("e-empresa").value   = fila.querySelector(".empresa-lead").textContent;
-            document.getElementById("e-telefono").value  = fila.querySelector(".telefono-lead").textContent;
-            document.getElementById("e-email").value     = fila.querySelector(".email-lead").textContent;
+            document.getElementById("e-id").value = fila.dataset.idLead;
+            document.getElementById("e-nombre").value = fila.querySelector(".nombre-lead").textContent;
+            document.getElementById("e-empresa").value = fila.querySelector(".empresa-lead").textContent;
+            document.getElementById("e-telefono").value = fila.querySelector(".telefono-lead").textContent;
+            document.getElementById("e-email").value = fila.querySelector(".email-lead").textContent;
             document.getElementById("e-captacion").value = fila.querySelector(".captacion-lead").textContent;
-            document.getElementById("e-estado").value    = fila.querySelector(".estado-lead").textContent;
-            document.getElementById("e-fecha").value     = fila.querySelector(".fecha-de-contacto-lead").textContent;
+            document.getElementById("e-estado").value = fila.querySelector(".estado-lead").textContent;
+            document.getElementById("e-fecha").value = fila.querySelector(".fecha-de-contacto-lead").textContent;
 
             mensajeEditar.classList.add("hidden");
             modalEditar.showModal();
@@ -551,17 +557,17 @@
         });
 
         // Enviar los cambios al backend con PUT
-        formEditar.addEventListener("submit", function(e) {
+        formEditar.addEventListener("submit", function (e) {
             e.preventDefault();
             const datos = {
-                id_lead:          document.getElementById("e-id").value,
-                nombre:           document.getElementById("e-nombre").value.trim(),
-                empresa:          document.getElementById("e-empresa").value.trim(),
-                telefono:         document.getElementById("e-telefono").value.trim(),
-                email:            document.getElementById("e-email").value.trim(),
+                id_lead: document.getElementById("e-id").value,
+                nombre: document.getElementById("e-nombre").value.trim(),
+                empresa: document.getElementById("e-empresa").value.trim(),
+                telefono: document.getElementById("e-telefono").value.trim(),
+                email: document.getElementById("e-email").value.trim(),
                 fuente_captacion: document.getElementById("e-captacion").value,
-                estado:           document.getElementById("e-estado").value,
-                fecha_contacto:   document.getElementById("e-fecha").value,
+                estado: document.getElementById("e-estado").value,
+                fecha_contacto: document.getElementById("e-fecha").value,
             };
 
             fetch("/leads/editar", {
@@ -569,31 +575,31 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(datos)
             })
-            .then(res => res.json())
-            .then(json => {
-                if (json.ok) {
-                    modalEditar.close();
-                    formEditar.reset();
-                    location.reload(); // Recarga la tabla con los datos actualizados
-                } else {
-                    mensajeEditar.textContent = "❌ " + (json.error || "Error al guardar.");
+                .then(res => res.json())
+                .then(json => {
+                    if (json.ok) {
+                        modalEditar.close();
+                        formEditar.reset();
+                        location.reload(); // Recarga la tabla con los datos actualizados
+                    } else {
+                        mensajeEditar.textContent = "❌ " + (json.error || "Error al guardar.");
+                        mensajeEditar.style.color = "red";
+                        mensajeEditar.classList.remove("hidden");
+                    }
+                })
+                .catch(() => {
+                    mensajeEditar.textContent = "❌ No se pudo conectar con el servidor.";
                     mensajeEditar.style.color = "red";
                     mensajeEditar.classList.remove("hidden");
-                }
-            })
-            .catch(() => {
-                mensajeEditar.textContent = "❌ No se pudo conectar con el servidor.";
-                mensajeEditar.style.color = "red";
-                mensajeEditar.classList.remove("hidden");
-            });
+                });
         });
 
         // ===== Lógica del botón ELIMINAR (papelera) =====
-        document.getElementById("listado-leads").addEventListener("click", function(e) {
+        document.getElementById("listado-leads").addEventListener("click", function (e) {
             const btnEliminar = e.target.closest(".btn-eliminar");
             if (!btnEliminar) return;
 
-            const fila   = btnEliminar.closest("tr");
+            const fila = btnEliminar.closest("tr");
             const idLead = fila.dataset.idLead;
             const nombre = fila.querySelector(".nombre-lead").textContent;
 
@@ -603,16 +609,16 @@
             fetch(`/leads/eliminar/${idLead}`, {
                 method: "DELETE"
             })
-            .then(res => res.json())
-            .then(json => {
-                if (json.ok) {
-                    // Eliminamos la fila de la tabla sin recargar
-                    fila.remove();
-                } else {
-                    alert("❌ " + (json.error || "No se pudo eliminar el lead."));
-                }
-            })
-            .catch(() => alert("❌ No se pudo conectar con el servidor."));
+                .then(res => res.json())
+                .then(json => {
+                    if (json.ok) {
+                        // Eliminamos la fila de la tabla sin recargar
+                        fila.remove();
+                    } else {
+                        alert("❌ " + (json.error || "No se pudo eliminar el lead."));
+                    }
+                })
+                .catch(() => alert("❌ No se pudo conectar con el servidor."));
         });
     </script>
 

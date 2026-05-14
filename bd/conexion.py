@@ -11,7 +11,7 @@ def crear_conexion():
         conexion = mysql.connector.connect(
             host="b6vqc2uyeo3cmbs6cgrx-mysql.services.clever-cloud.com",
             user="ufigwhllqfa0jdm0",
-            password="IhmnVOXgPNuWuKFBEzYm", 
+            password="IhmnVOXgPNuWuKFBEzYm",
             database="b6vqc2uyeo3cmbs6cgrx",
         )
         if conexion.is_connected():

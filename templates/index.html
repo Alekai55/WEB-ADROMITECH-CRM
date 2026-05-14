@@ -11,19 +11,61 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/static/assets/css/style.css">
     <style>
-        /* Entrada escalonada para las tarjetas de estadísticas */
-        .card-stat { animation: entrada-abajo 0.45s ease both; }
-        .card-stat:nth-child(1) { animation-delay: 0.05s; }
-        .card-stat:nth-child(2) { animation-delay: 0.15s; }
-        .card-stat:nth-child(3) { animation-delay: 0.25s; }
+        /* ── Ticker del menú ── */
+        /* Para que funcione la animación del ticker se debe incluir estos keyframes en todos los html debido a que el ticker se aloja en menu.html */
+        @keyframes desplazamiento {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .animacion {
+            display: flex;
+            width: max-content;
+            animation: desplazamiento 16s linear infinite;
+        }
+
+        .animacion:hover {
+            animation-play-state: paused;
+        }
+
+        /* ── Entrada escalonada para las tarjetas de estadísticas ── */
+        .card-stat {
+            animation: entrada-abajo 0.45s ease both;
+        }
+
+        .card-stat:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .card-stat:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .card-stat:nth-child(3) {
+            animation-delay: 0.25s;
+        }
 
         @keyframes entrada-abajo {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Hover en los enlaces de las tarjetas */
-        .card-stat a:hover { text-decoration: underline; }
+        .card-stat a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -45,17 +87,17 @@
             <div class="card-stat stat rounded-2xl shadow-md glow-verde"
                 style="background-color: #ffffff; border-left: 5px solid var(--color-acento);">
                 <div class="stat-figure">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                        fill="none" stroke="var(--color-oscuro-suave)" stroke-width="1.8"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="var(--color-oscuro-suave)" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
                     </svg>
                 </div>
                 <div class="stat-title font-bold uppercase text-xs tracking-widest"
                     style="color: var(--color-oscuro); opacity: 0.7;">Total Leads</div>
-                <div class="stat-value text-4xl font-extrabold" style="color: var(--color-oscuro);"
-                    id="stat-leads">—</div>
+                <div class="stat-value text-4xl font-extrabold" style="color: var(--color-oscuro);" id="stat-leads">—
+                </div>
                 <div class="stat-desc font-semibold">
                     <a href="/admin-leads" style="color: var(--color-acento-suave);">Ver listado →</a>
                 </div>
@@ -65,19 +107,18 @@
             <div class="card-stat stat rounded-2xl shadow-md"
                 style="background-color: var(--color-oscuro); border-left: 5px solid var(--color-acento);">
                 <div class="stat-figure">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                        fill="none" stroke="var(--color-acento)" stroke-width="1.8"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="var(--color-acento)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>
                 </div>
                 <div class="stat-title font-bold uppercase text-xs tracking-widest"
                     style="color: var(--color-acento); opacity: 0.8;">Total Clientes</div>
-                <div class="stat-value text-4xl font-extrabold" style="color: var(--color-acento);"
-                    id="stat-clientes">—</div>
+                <div class="stat-value text-4xl font-extrabold" style="color: var(--color-acento);" id="stat-clientes">—
+                </div>
                 <div class="stat-desc font-semibold">
                     <a href="/admin-clientes" style="color: var(--color-gris-texto);">Ver listado →</a>
                 </div>
@@ -87,18 +128,17 @@
             <div class="card-stat stat rounded-2xl shadow-md"
                 style="background-color: #ffffff; border-left: 5px solid var(--color-oscuro);">
                 <div class="stat-figure">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                        fill="none" stroke="var(--color-oscuro)" stroke-width="1.8"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                        <line x1="3" y1="6" x2="21" y2="6"/>
-                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="var(--color-oscuro)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
                     </svg>
                 </div>
                 <div class="stat-title font-bold uppercase text-xs tracking-widest"
                     style="color: var(--color-oscuro); opacity: 0.7;">Total Pedidos</div>
-                <div class="stat-value text-4xl font-extrabold" style="color: var(--color-oscuro);"
-                    id="stat-pedidos">—</div>
+                <div class="stat-value text-4xl font-extrabold" style="color: var(--color-oscuro);" id="stat-pedidos">—
+                </div>
                 <div class="stat-desc font-semibold">
                     <a href="/admin-pedidos" style="color: var(--color-oscuro-suave);">Ver listado →</a>
                 </div>
@@ -109,8 +149,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer style="background-color: var(--color-oscuro);"
-        class="text-center text-gray-400 py-6 mt-10 text-sm">
+    <footer style="background-color: var(--color-oscuro);" class="text-center text-gray-400 py-6 mt-10 text-sm">
         &copy; ADROMITECH 2026
     </footer>
 
@@ -119,9 +158,9 @@
         fetch("/dashboard/stats")
             .then(res => res.json())
             .then(data => {
-                document.getElementById("stat-leads").textContent    = data.leads    ?? "—";
+                document.getElementById("stat-leads").textContent = data.leads ?? "—";
                 document.getElementById("stat-clientes").textContent = data.clientes ?? "—";
-                document.getElementById("stat-pedidos").textContent  = data.pedidos  ?? "—";
+                document.getElementById("stat-pedidos").textContent = data.pedidos ?? "—";
             })
             .catch(() => {
                 ["stat-leads", "stat-clientes", "stat-pedidos"].forEach(id => {
