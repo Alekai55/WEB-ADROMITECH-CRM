@@ -85,3 +85,24 @@ def actualizar_lead(id_lead, nombre, empresa, telefono, email, fuente_captacion,
             cursor.close()
         if conexion is not None and conexion.is_connected():
             conexion.close()
+
+
+def eliminar_lead(id_lead):
+    """Elimina un lead de la base de datos por su id."""
+    conexion = crear_conexion()
+    if conexion is None:
+        return False
+
+    try:
+        cursor = conexion.cursor()
+        cursor.execute("DELETE FROM leads WHERE id_lead = %s", (id_lead,))
+        conexion.commit()
+        return cursor.rowcount > 0  # True si se eliminó al menos 1 fila
+    except Exception as e:
+        print(f"Error al eliminar lead: {e}")
+        return False
+    finally:
+        if "cursor" in locals() and cursor is not None:
+            cursor.close()
+        if conexion is not None and conexion.is_connected():
+            conexion.close()

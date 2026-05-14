@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from bd.repositorio_bd import obtener_leads, insertar_lead, actualizar_lead
+from bd.repositorio_bd import obtener_leads, insertar_lead, actualizar_lead, eliminar_lead
 
 app = Flask(__name__)
 
@@ -56,6 +56,16 @@ def editar_lead():
         return jsonify({"ok": True}), 200
     else:
         return jsonify({"ok": False, "error": "No se pudo actualizar el lead"}), 500
+
+
+@app.route("/leads/eliminar/<int:id_lead>", methods=["DELETE"])
+def eliminar_lead_route(id_lead):
+    """Elimina un lead por su id."""
+    exito = eliminar_lead(id_lead)
+    if exito:
+        return jsonify({"ok": True}), 200
+    else:
+        return jsonify({"ok": False, "error": "No se pudo eliminar el lead"}), 500
 
 
 if __name__ == "__main__":
