@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM ADROMITECH</title>
     <link rel="icon" type="image/png" href="/static/assets/img/logo_trebol.png">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> <!--Insertar Tailwind-->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <!--Insertar DaisyUI-->
+    <link rel="stylesheet" href="/static/assets/css/style.css"> <!--Llamar al archivo css que contiene los keywords -->
     <style>
         /* Animación CSS para el Ticker superior */
         @keyframes desplazamiento {
@@ -54,7 +55,7 @@
     <main class="flex-grow p-4 md:p-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="titulo-seccion">Listado de Leads</h1>
-            <button class="btn"
+            <button id="btn-nuevo-lead" class="btn"
                 style="background-color: var(--color-oscuro); color: var(--color-acento); border: none;">Nuevo
                 Contacto</button>
         </div>
@@ -103,6 +104,146 @@
         &copy; ADROMITECH 2026
     </footer>
 
+    <!-- ===== MODAL: Formulario nuevo lead ===== -->
+    <dialog id="modal-nuevo-lead" class="modal modal-bottom sm:modal-middle">
+        <!-- max-w-3xl: tarjeta grande | glow-verde: neón | animar-entrada: desliza al abrirse -->
+        <div class="modal-box w-full max-w-3xl glow-verde animar-entrada"
+            style="background-color: #fff; padding: 0; overflow-y: auto; max-height: 92vh;">
+
+            <!-- ── Cabecera ── -->
+            <div class="px-8 py-5" style="background-color: var(--color-oscuro); border-radius: 1rem 1rem 0 0;">
+                <h3 class="titulo-seccion"
+                    style="font-size: 1.4rem; border-left-color: var(--color-acento); color: var(--color-acento);">
+                    ✦ Nuevo Lead
+                </h3>
+                <p style="color: var(--color-gris-texto); font-size: 0.85rem; margin-top: 2px;">
+                    Rellena los datos del contacto para añadirlo al CRM
+                </p>
+            </div>
+
+            <!-- ── Cuerpo del formulario ── -->
+            <form id="form-nuevo-lead" class="px-8 py-6" style="display: grid; gap: 1.25rem;">
+
+                <!-- Fila 1: Nombre + Empresa -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <!-- apartado del nombre con placeholder orientativo para incluir nombre y apellido -->
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Nombre *</span>
+                        </label>
+                        <input id="f-nombre" type="text" placeholder="Nombre completo"
+                            class="input input-bordered w-full" required
+                            style="border-color: var(--color-oscuro-suave); focus-outline: none;">
+                    </div>
+                    <!-- apartado de la empresa para poner su nombre sin excepciones definidas -->
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Empresa</span>
+                        </label>
+                        <input id="f-empresa" type="text" placeholder="Nombre de la empresa"
+                            class="input input-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                    </div>
+                </div>
+
+                <!-- Fila 2: Teléfono + Email -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <!-- apartado del teléfono con placeholder de referencia -->
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Teléfono</span>
+                        </label>
+                        <input id="f-telefono" type="tel" placeholder="600 000 000"
+                            class="input input-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                    </div>
+                    <!-- apartado del email con placeholder orientativo -->
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Email</span>
+                        </label>
+                        <input id="f-email" type="email" placeholder="correo@ejemplo.com"
+                            class="input input-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                    </div>
+                </div>
+
+                <!-- Fila 3: Captación + Estado -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <!-- captación: opciones seleccionables para evitar confusión -->
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Captación</span>
+                        </label>
+                        <select id="f-captacion" class="select select-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                            <option value="">Seleccionar...</option>
+                            <option>Formulario Web</option>
+                            <option>Campaña Google</option>
+                            <option>Redes Sociales</option>
+                            <option>Referido</option>
+                            <option>Llamada directa</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+                    <!-- estado: opciones seleccionables -->
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Estado</span>
+                        </label>
+                        <select id="f-estado" class="select select-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                            <option value="">Seleccionar...</option>
+                            <option>nuevo</option>
+                            <option>en progreso</option>
+                            <option>convertido</option>
+                            <option>descartado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fila 4: Fecha (columna completa) -->
+                <!-- tipo date para evitar confusión con el formato -->
+                <div class="form-control">
+                    <label class="label pb-1">
+                        <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Fecha de contacto</span>
+                    </label>
+                    <input id="f-fecha" type="date" class="input input-bordered w-full"
+                        style="border-color: var(--color-oscuro-suave);">
+                </div>
+
+                <!-- Mensaje de error/éxito -->
+                <div id="form-mensaje" class="hidden text-sm font-semibold rounded-lg px-4 py-2"></div>
+
+                <!-- Acciones -->
+                <div class="modal-action mt-0 pt-4" style="border-top: 1px solid #e5e7eb;">
+                    <!-- bg-pulso-marca: fondo oscuro pulsante animado -->
+                    <button type="submit" id="btn-guardar" class="btn px-8 bg-pulso-marca"
+                        style="color: var(--color-acento); border: none; font-weight: 700;">
+                        Guardar Lead
+                    </button>
+                    <button type="button" id="btn-cerrar-modal" class="btn btn-ghost px-8">Cancelar</button>
+                </div>
+
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Estilos de foco para los inputs del modal -->
+    <style>
+        #form-nuevo-lead input:focus,
+        #form-nuevo-lead select:focus {
+            outline: 2px solid var(--color-acento);
+            border-color: var(--color-acento);
+        }
+        /* En móvil: colapsar a 1 columna */
+        @media (max-width: 640px) {
+            #form-nuevo-lead > div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+
     <!-- Traemos jQuery para las llamadas AJAX -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -141,6 +282,90 @@
                 // Añadimos el clon ya relleno al contenedor principal
                 listado.appendChild(clon);
             });
+        });
+
+        // ===== Introducir Lógica del Modal (Formulario de Tailwind) =====
+        const modal = document.getElementById("modal-nuevo-lead");
+        const btnAbrir = document.getElementById("btn-nuevo-lead");
+        const btnCerrar = document.getElementById("btn-cerrar-modal");
+        const form = document.getElementById("form-nuevo-lead");
+        const mensaje = document.getElementById("form-mensaje");
+
+        // Abrir el modal al hacer clic en el botón
+        btnAbrir.addEventListener("click", () => modal.showModal());
+
+        // Cerrar el modal con el botón Cancelar
+        btnCerrar.addEventListener("click", () => {
+            modal.close();
+            form.reset();
+            mensaje.classList.add("hidden");
+        });
+
+        // Enviar el formulario por AJAX
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Evitamos que recargue la página
+
+            const datos = {
+                nombre: document.getElementById("f-nombre").value.trim(),
+                empresa: document.getElementById("f-empresa").value.trim(),
+                telefono: document.getElementById("f-telefono").value.trim(),
+                email: document.getElementById("f-email").value.trim(),
+                fuente_captacion: document.getElementById("f-captacion").value,
+                estado: document.getElementById("f-estado").value,
+                fecha_contacto: document.getElementById("f-fecha").value,
+            };
+
+            fetch("/leads/nuevo", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(datos)
+            })
+                .then(res => res.json())
+                .then(json => {
+                    if (json.ok) {
+                        // Éxito: cerramos el modal, reseteamos el form y recargamos la tabla
+                        modal.close();
+                        form.reset();
+                        // Limpiamos la tabla y volvemos a cargar los datos desde el servidor
+                        document.getElementById("listado-leads").innerHTML =
+                            document.getElementById("leads-plantilla").outerHTML;
+                        $.getJSON("leads").done(function (json2) {
+                            let listado = document.getElementById("listado-leads");
+                            let plantilla = document.getElementById("leads-plantilla");
+                            json2.forEach((element) => {
+                                let clon = plantilla.cloneNode(true);
+                                clon.id = "";
+                                clon.style.display = "table-row";
+                                clon.querySelector(".id-lead").textContent = element.id_lead;
+                                clon.querySelector(".nombre-lead").textContent = element.nombre;
+                                clon.querySelector(".empresa-lead").textContent = element.empresa;
+                                clon.querySelector(".telefono-lead").textContent = element.telefono;
+                                clon.querySelector(".email-lead").textContent = element.email;
+                                clon.querySelector(".captacion-lead").textContent = element.fuente_captacion;
+                                clon.querySelector(".estado-lead").textContent = element.estado;
+                                clon.querySelector(".fecha-de-contacto-lead").textContent = element.fecha_contacto;
+                                let estadoSpan = clon.querySelector(".estado-cliente");
+                                estadoSpan.textContent = element.estado.toUpperCase();
+                                if (element.estado === 'activo' || element.estado === 'convertido') {
+                                    estadoSpan.classList.add("bg-green-100", "text-green-800");
+                                } else {
+                                    estadoSpan.classList.add("bg-red-100", "text-red-800");
+                                }
+                                listado.appendChild(clon);
+                            });
+                        });
+                    } else {
+                        // Error del servidor
+                        mensaje.textContent = "❌ " + (json.error || "Error al guardar.");
+                        mensaje.style.color = "red";
+                        mensaje.classList.remove("hidden");
+                    }
+                })
+                .catch(() => {
+                    mensaje.textContent = "❌ No se pudo conectar con el servidor.";
+                    mensaje.style.color = "red";
+                    mensaje.classList.remove("hidden");
+                });
         });
     </script>
 
