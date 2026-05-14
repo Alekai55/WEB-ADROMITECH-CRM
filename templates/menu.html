@@ -1,0 +1,60 @@
+<!-- MENU RESPONSIVO COMPARTIDO  -->
+
+<!-- Barra superior animada con estadísticas  -->
+
+<div class="bg-indigo-700">
+    <div class="animacion text-sm text-indigo-100">
+        <span class="px-4 font-bold">📈 Ventas +15% este mes</span>
+        <span class="px-4 font-bold">👥 3 Clientes Nuevos</span>
+        <span class="px-4 font-bold">⚠️ 2 Facturas Pendientes</span>
+        <span class="px-4 font-bold">🚀 Objetivo Q2 al 80%</span>
+    </div>
+</div>
+
+<!-- Barra de navegación principal  -->
+ <nav class="bg-slate-900 shadow-md text-white">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between py-4">
+        
+        <!-- Logo del sitio -->
+        <span class="text-2xl font-extrabold text-indigo-400">CRM Empresarial</span>
+        
+        <!-- Botón de Hamburguesa para pantallas pequeñas (móviles) -->
+        <button id="hamburguesa" class="md:hidden flex flex-col gap-1.5 p-2">
+            <span class="w-6 h-0.5 bg-white"></span>
+            <span class="w-6 h-0.5 bg-white"></span>
+            <span class="w-6 h-0.5 bg-white"></span>
+        </button>
+        
+        <!-- Menú normal para pantallas grandes -->
+        <ul class="hidden md:flex gap-6 text-sm font-semibold">
+            <li><a href="/" class="hover:text-indigo-400 transition">Inicio</a></li>
+            <li><a href="/admin-leads" class="hover:text-indigo-400 transition">Leads</a></li>
+            <li><a href="/admin-clientes" class="hover:text-indigo-400 transition">Clientes</a></li>
+            <li><a href="/admin-comerciales" class="hover:text-indigo-400 transition">Comerciales</a></li>
+            <li><a href="/admin-pedidos" class="hover:text-indigo-400 transition">Pedidos</a></li>
+            <li><a href="/admin-facturas" class="hover:text-indigo-400 transition">Facturas</a></li>
+        </ul>
+    </div>
+    
+    <!-- Menú desplegable para pantallas pequeñas (móviles) -->
+    <div id="menu-movil" class="hidden px-4 pb-4 pt-3 bg-slate-800">
+        <ul class="flex flex-col gap-2 text-sm font-semibold">
+            <li><a href="/" class="hover:text-indigo-400 transition">Inicio</a></li>
+            <li><a href="/admin-leads" class="hover:text-indigo-400 transition">Leads</a></li>
+            <li><a href="/admin-clientes" class="hover:text-indigo-400 transition">Clientes</a></li>
+            <li><a href="/admin-comerciales" class="hover:text-indigo-400 transition">Comerciales</a></li>
+            <li><a href="/admin-pedidos" class="hover:text-indigo-400 transition">Pedidos</a></li>
+            <li><a href="/admin-facturas" class="hover:text-indigo-400 transition">Facturas</a></li>
+        </ul>
+
+    </div>
+</nav>
+
+<!-- Lógica en JS para abrir y cerrar el menú en móvil -->
+<script>
+    // Buscamos el botón y le añadimos el evento click
+    document.getElementById("hamburguesa").addEventListener("click", function () {
+        // .classList.toggle quita o pone la clase 'hidden' de Tailwind
+        document.getElementById("menu-movil").classList.toggle("hidden")
+    })
+</script>
