@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="/static/assets/img/logo_trebol.png">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/static/assets/css/style.css">
     <style>
         /* Animación CSS para el Ticker superior */
         @keyframes desplazamiento {
@@ -30,25 +31,38 @@
             animation-play-state: paused;
             /* Se para al pasar el ratón */
         }
+
+        /* Estilos del cuerpo de la tabla de leads */
+        #listado-leads tr {
+            background-color: #ffffff;
+            color: #111827;
+        }
+
+        #listado-leads tr:hover {
+            background-color: rgba(0, 255, 128, 0.08);
+            transition: background-color 0.2s ease;
+        }
     </style>
 </head>
 
 <!-- He añadido flex y flex-col para que el footer se quede abajo si hay poco contenido -->
 
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col" style="background-color: #f3f4f6;">
     <!-- Insertamos el menú compartido -->
     {% include 'menu.html' %}
 
     <main class="flex-grow p-4 md:p-8">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-800">Listado de Leads</h1>
-            <button class="btn btn-primary">Nuevo Contacto</button>
+            <h1 class="titulo-seccion">Listado de Leads</h1>
+            <button class="btn"
+                style="background-color: var(--color-oscuro); color: var(--color-acento); border: none;">Nuevo
+                Contacto</button>
         </div>
 
-        <div class="overflow-x-auto bg-white rounded-box shadow">
-            <table class="table table-zebra w-full">
+        <div class="overflow-x-auto rounded-box shadow glow-verde">
+            <table class="table w-full" style="background-color: #fff;">
                 <!-- head -->
-                <thead class="bg-base-200 text-base-content">
+                <thead style="background-color: var(--color-oscuro); color: var(--color-acento);">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
@@ -61,14 +75,31 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="listado-leads">
+                    <!-- Plantilla oculta para clonar -->
+                    <tr id="leads-plantilla" style="display: none;">
+                        <th class="id-lead"></th>
+                        <td class="nombre-lead"></td>
+                        <td class="empresa-lead"></td>
+                        <td class="telefono-lead"></td>
+                        <td class="email-lead"></td>
+                        <td class="captacion-lead"></td>
+                        <td>
+                            <div class="estado-cliente estado-lead badge text-white badge-sm font-bold"></div>
+                        </td>
+                        <td class="fecha-de-contacto-lead"></td>
+                        <td class="flex gap-2">
+                            <button class="btn btn-xs btn-info text-white">Editar</button>
+                            <button class="btn btn-xs btn-error text-white">Eliminar</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </main>
 
     <!-- FOOTER -->
-    <footer class="text-center bg-gray-900 text-gray-400 py-6 mt-10">
+    <footer style="background-color: var(--color-oscuro);" class="text-center bg-gray-900 text-gray-400 py-6 mt-10">
         &copy; ADROMITECH 2026
     </footer>
 
@@ -85,7 +116,8 @@
             json.forEach((element) => {
                 // Clonamos la plantilla HTML
                 let clon = plantilla.cloneNode(true);
-                clon.style.display = "block"; // La hacemos visible
+                clon.id = ""; // Evitamos duplicar el id
+                clon.style.display = "table-row"; // Mantiene la estructura correcta de la tabla
 
                 // Rellenamos los datos del cliente en el clon
                 clon.querySelector(".id-lead").textContent = element.id_lead;

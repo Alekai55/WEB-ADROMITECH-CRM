@@ -1,60 +1,71 @@
 <!-- MENU RESPONSIVO COMPARTIDO  -->
 
 <!-- Barra superior animada con estadísticas  -->
-
-<div class="bg-indigo-700">
-    <div class="animacion text-sm text-indigo-100">
-        <span class="px-4 font-bold">📈 Ventas +15% este mes</span>
-        <span class="px-4 font-bold">👥 3 Clientes Nuevos</span>
-        <span class="px-4 font-bold">⚠️ 2 Facturas Pendientes</span>
-        <span class="px-4 font-bold">🚀 Objetivo Q2 al 80%</span>
+<div style="background-color: var(--color-oscuro-medio); overflow: hidden;">
+    <div class="animacion text-sm" style="color: var(--color-acento);">
+        <span class="px-4 font-bold">OOOOUUU OOOOHHHH</span>
+        <span class="px-4 font-bold">You know you love me</span>
+        <span class="px-4 font-bold">I know you care</span>
+        <span class="px-4 font-bold">Just shout whenever, and i´ll be there</span>
+        <span class="px-4 font-bold">You are my love, you are my heart</span>
     </div>
 </div>
 
 <!-- Barra de navegación principal  -->
- <nav class="bg-slate-900 shadow-md text-white">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between py-4">
-        
+<nav  >
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between py-4">
+
         <!-- Logo del sitio -->
-        <span class="text-2xl font-extrabold text-indigo-400">CRM Empresarial</span>
-        
+        <div class="flex items-center gap-3">
+            <img src="/static/assets/img/logo_trebol.png" alt="Logo ADROMITECH" class="h-9 w-9 object-contain">
+            <span class="text-2xl font-extrabold tracking-wide" style="color: var(--color-acento);">ADROMITECH CRM</span>
+        </div>
+
         <!-- Botón de Hamburguesa para pantallas pequeñas (móviles) -->
         <button id="hamburguesa" class="md:hidden flex flex-col gap-1.5 p-2">
-            <span class="w-6 h-0.5 bg-white"></span>
-            <span class="w-6 h-0.5 bg-white"></span>
-            <span class="w-6 h-0.5 bg-white"></span>
+            <span class="w-6 h-0.5" style="background-color: var(--color-acento);"></span>
+            <span class="w-6 h-0.5" style="background-color: var(--color-acento);"></span>
+            <span class="w-6 h-0.5" style="background-color: var(--color-acento);"></span>
         </button>
-        
+
         <!-- Menú normal para pantallas grandes -->
-        <ul class="hidden md:flex gap-6 text-sm font-semibold">
-            <li><a href="/" class="hover:text-indigo-400 transition">Inicio</a></li>
-            <li><a href="/admin-leads" class="hover:text-indigo-400 transition">Leads</a></li>
-            <li><a href="/admin-clientes" class="hover:text-indigo-400 transition">Clientes</a></li>
-            <li><a href="/admin-comerciales" class="hover:text-indigo-400 transition">Comerciales</a></li>
-            <li><a href="/admin-pedidos" class="hover:text-indigo-400 transition">Pedidos</a></li>
-            <li><a href="/admin-facturas" class="hover:text-indigo-400 transition">Facturas</a></li>
+        <ul class="hidden md:flex gap-8 text-sm font-semibold">
+            <li><a href="/" class="nav-link transition-colors duration-200">Inicio</a></li>
+            <li><a href="/admin-leads" class="nav-link transition-colors duration-200">Leads</a></li>
+            <li><a href="/admin-clientes" class="nav-link transition-colors duration-200">Clientes</a></li>
+            <li><a href="/admin-comerciales" class="nav-link transition-colors duration-200">Comerciales</a></li>
+            <li><a href="/admin-pedidos" class="nav-link transition-colors duration-200">Pedidos</a></li>
+            <li><a href="/admin-facturas" class="nav-link transition-colors duration-200">Facturas</a></li>
         </ul>
     </div>
-    
-    <!-- Menú desplegable para pantallas pequeñas (móviles) -->
-    <div id="menu-movil" class="hidden px-4 pb-4 pt-3 bg-slate-800">
-        <ul class="flex flex-col gap-2 text-sm font-semibold">
-            <li><a href="/" class="hover:text-indigo-400 transition">Inicio</a></li>
-            <li><a href="/admin-leads" class="hover:text-indigo-400 transition">Leads</a></li>
-            <li><a href="/admin-clientes" class="hover:text-indigo-400 transition">Clientes</a></li>
-            <li><a href="/admin-comerciales" class="hover:text-indigo-400 transition">Comerciales</a></li>
-            <li><a href="/admin-pedidos" class="hover:text-indigo-400 transition">Pedidos</a></li>
-            <li><a href="/admin-facturas" class="hover:text-indigo-400 transition">Facturas</a></li>
-        </ul>
 
+    <!-- Menú desplegable para pantallas pequeñas (móviles) -->
+    <div id="menu-movil" class="hidden px-6 pb-4 pt-3" style="background-color: var(--color-oscuro-medio);">
+        <ul class="flex flex-col gap-3 text-sm font-semibold">
+            <li><a href="/" class="nav-link transition-colors duration-200">Inicio</a></li>
+            <li><a href="/admin-leads" class="nav-link transition-colors duration-200">Leads</a></li>
+            <li><a href="/admin-clientes" class="nav-link transition-colors duration-200">Clientes</a></li>
+            <li><a href="/admin-comerciales" class="nav-link transition-colors duration-200">Comerciales</a></li>
+            <li><a href="/admin-pedidos" class="nav-link transition-colors duration-200">Pedidos</a></li>
+            <li><a href="/admin-facturas" class="nav-link transition-colors duration-200">Facturas</a></li>
+        </ul>
     </div>
 </nav>
 
+<!-- Estilos del menú usando las variables del CSS global -->
+<style>
+    .nav-link {
+        color: var(--color-gris-texto);
+    }
+
+    .nav-link:hover {
+        color: var(--color-acento);
+    }
+</style>
+
 <!-- Lógica en JS para abrir y cerrar el menú en móvil -->
 <script>
-    // Buscamos el botón y le añadimos el evento click
     document.getElementById("hamburguesa").addEventListener("click", function () {
-        // .classList.toggle quita o pone la clase 'hidden' de Tailwind
         document.getElementById("menu-movil").classList.toggle("hidden")
     })
 </script>
