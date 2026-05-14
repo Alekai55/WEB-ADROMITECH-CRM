@@ -9,6 +9,23 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/admin-leads")
+def admin_leads():
+    """Renderiza la página de gestión de leads."""
+    return render_template("leads.html")
+
+
+@app.route("/dashboard/stats")
+def dashboard_stats():
+    """Devuelve los totales de leads, clientes y pedidos para el dashboard."""
+    from bd.repositorio_bd import contar_registros
+    return jsonify({
+        "leads":    contar_registros("leads"),
+        "clientes": contar_registros("cliente"),
+        "pedidos":  contar_registros("pedido"),
+    })
+
+
 @app.route("/leads")
 def leads():
     lista_leads = obtener_leads()
@@ -37,7 +54,7 @@ def nuevo_lead():
             500,
         )
 
-
+#MÉTODO para que al arrancar la web, pueda realizar cambios en la base de datos a través del respectivo botón 
 @app.route("/leads/editar", methods=["PUT"])
 def editar_lead():
     """Recibe los datos actualizados del lead y ejecuta el UPDATE."""
@@ -57,7 +74,7 @@ def editar_lead():
     else:
         return jsonify({"ok": False, "error": "No se pudo actualizar el lead"}), 500
 
-
+#MÉTODO para que al arrancar la web, pueda eliminar datos de la base de datos
 @app.route("/leads/eliminar/<int:id_lead>", methods=["DELETE"])
 def eliminar_lead_route(id_lead):
     """Elimina un lead por su id."""
