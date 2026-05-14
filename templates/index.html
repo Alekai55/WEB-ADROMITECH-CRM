@@ -89,8 +89,17 @@
                             <div class="estado-cliente estado-lead badge text-white badge-sm font-bold"></div>
                         </td>
                         <td class="fecha-de-contacto-lead"></td>
-                        <td class="flex gap-2">
-                            <button class="btn btn-xs btn-info text-white">Editar</button>
+                        <td class="flex gap-2 items-center">
+                            <!-- Icono lápiz: abre el modal de edición con los datos del lead -->
+                            <button class="btn-editar btn btn-xs" title="Editar lead"
+                                style="background-color: var(--color-oscuro); color: var(--color-acento); border: none; padding: 4px 8px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                </svg>
+                            </button>
                             <button class="btn btn-xs btn-error text-white">Eliminar</button>
                         </td>
                     </tr>
@@ -113,8 +122,8 @@
             <!-- ── Cabecera ── -->
             <div class="px-8 py-5" style="background-color: var(--color-oscuro); border-radius: 1rem 1rem 0 0;">
                 <h3 class="titulo-seccion"
-                    style="font-size: 1.4rem; border-left-color: var(--color-acento); color: var(--color-acento);">
-                    ✦ Nuevo Lead
+                    style="font-size: 1.4rem;color: var(--color-acento);">
+                    Nuevo Lead
                 </h3>
                 <p style="color: var(--color-gris-texto); font-size: 0.85rem; margin-top: 2px;">
                     Rellena los datos del contacto para añadirlo al CRM
@@ -129,7 +138,9 @@
                     <!-- apartado del nombre con placeholder orientativo para incluir nombre y apellido -->
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Nombre *</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Nombre
+                                *</span>
                         </label>
                         <input id="f-nombre" type="text" placeholder="Nombre completo"
                             class="input input-bordered w-full" required
@@ -138,11 +149,11 @@
                     <!-- apartado de la empresa para poner su nombre sin excepciones definidas -->
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Empresa</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Empresa</span>
                         </label>
                         <input id="f-empresa" type="text" placeholder="Nombre de la empresa"
-                            class="input input-bordered w-full"
-                            style="border-color: var(--color-oscuro-suave);">
+                            class="input input-bordered w-full" style="border-color: var(--color-oscuro-suave);">
                     </div>
                 </div>
 
@@ -151,20 +162,20 @@
                     <!-- apartado del teléfono con placeholder de referencia -->
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Teléfono</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Teléfono</span>
                         </label>
-                        <input id="f-telefono" type="tel" placeholder="600 000 000"
-                            class="input input-bordered w-full"
-                            style="border-color: var(--color-oscuro-suave);">
+                        <input id="f-telefono" type="tel" maxlength="9" placeholder="600 000 000"
+                            class="input input-bordered w-full" style="border-color: var(--color-oscuro-suave);">
                     </div>
                     <!-- apartado del email con placeholder orientativo -->
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Email</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Email</span>
                         </label>
                         <input id="f-email" type="email" placeholder="correo@ejemplo.com"
-                            class="input input-bordered w-full"
-                            style="border-color: var(--color-oscuro-suave);">
+                            class="input input-bordered w-full" style="border-color: var(--color-oscuro-suave);">
                     </div>
                 </div>
 
@@ -173,7 +184,8 @@
                     <!-- captación: opciones seleccionables para evitar confusión -->
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Captación</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Captación</span>
                         </label>
                         <select id="f-captacion" class="select select-bordered w-full"
                             style="border-color: var(--color-oscuro-suave);">
@@ -189,7 +201,8 @@
                     <!-- estado: opciones seleccionables -->
                     <div class="form-control">
                         <label class="label pb-1">
-                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Estado</span>
+                            <span class="label-text font-bold"
+                                style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Estado</span>
                         </label>
                         <select id="f-estado" class="select select-bordered w-full"
                             style="border-color: var(--color-oscuro-suave);">
@@ -206,7 +219,9 @@
                 <!-- tipo date para evitar confusión con el formato -->
                 <div class="form-control">
                     <label class="label pb-1">
-                        <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Fecha de contacto</span>
+                        <span class="label-text font-bold"
+                            style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Fecha
+                            de contacto</span>
                     </label>
                     <input id="f-fecha" type="date" class="input input-bordered w-full"
                         style="border-color: var(--color-oscuro-suave);">
@@ -236,13 +251,136 @@
             outline: 2px solid var(--color-acento);
             border-color: var(--color-acento);
         }
+        #form-editar-lead input:focus,
+        #form-editar-lead select:focus {
+            outline: 2px solid var(--color-acento);
+            border-color: var(--color-acento);
+        }
+
         /* En móvil: colapsar a 1 columna */
         @media (max-width: 640px) {
-            #form-nuevo-lead > div[style*="grid-template-columns: 1fr 1fr"] {
+            #form-nuevo-lead>div[style*="grid-template-columns: 1fr 1fr"],
+            #form-editar-lead>div[style*="grid-template-columns: 1fr 1fr"] {
                 grid-template-columns: 1fr !important;
             }
         }
     </style>
+
+    <!-- ===== MODAL: Editar lead ===== -->
+    <dialog id="modal-editar-lead" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box w-full max-w-3xl glow-verde animar-entrada"
+            style="background-color: #fff; padding: 0; overflow-y: auto; max-height: 92vh;">
+
+            <!-- Cabecera -->
+            <div class="px-8 py-5" style="background-color: var(--color-oscuro); border-radius: 1rem 1rem 0 0;">
+                <h3 class="titulo-seccion"
+                    style="font-size: 1.4rem;color: var(--color-acento);">
+                    Editar Lead
+                </h3>
+                <p style="color: var(--color-gris-texto); font-size: 0.85rem; margin-top: 2px;">
+                    Modifica los datos del contacto seleccionado
+                </p>
+            </div>
+
+            <form id="form-editar-lead" class="px-8 py-6" style="display: grid; gap: 1.25rem;">
+                <!-- ID oculto del lead a editar -->
+                <input type="hidden" id="e-id">
+
+                <!-- Fila 1: Nombre + Empresa -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Nombre *</span>
+                        </label>
+                        <input id="e-nombre" type="text" placeholder="Nombre completo"
+                            class="input input-bordered w-full" required
+                            style="border-color: var(--color-oscuro-suave);">
+                    </div>
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Empresa</span>
+                        </label>
+                        <input id="e-empresa" type="text" placeholder="Nombre de la empresa"
+                            class="input input-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                    </div>
+                </div>
+
+                <!-- Fila 2: Teléfono + Email -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Teléfono</span>
+                        </label>
+                        <input id="e-telefono" type="tel" maxlength="9" placeholder="600 000 000"
+                            class="input input-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                    </div>
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Email</span>
+                        </label>
+                        <input id="e-email" type="email" placeholder="correo@ejemplo.com"
+                            class="input input-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                    </div>
+                </div>
+
+                <!-- Fila 3: Captación + Estado -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Captación</span>
+                        </label>
+                        <select id="e-captacion" class="select select-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                            <option value="">Seleccionar...</option>
+                            <option>Formulario Web</option>
+                            <option>Campaña Google</option>
+                            <option>Redes Sociales</option>
+                            <option>Referido</option>
+                            <option>Llamada directa</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label pb-1">
+                            <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Estado</span>
+                        </label>
+                        <select id="e-estado" class="select select-bordered w-full"
+                            style="border-color: var(--color-oscuro-suave);">
+                            <option value="">Seleccionar...</option>
+                            <option>nuevo</option>
+                            <option>en progreso</option>
+                            <option>convertido</option>
+                            <option>descartado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fila 4: Fecha -->
+                <div class="form-control">
+                    <label class="label pb-1">
+                        <span class="label-text font-bold" style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Fecha de contacto</span>
+                    </label>
+                    <input id="e-fecha" type="date" class="input input-bordered w-full"
+                        style="border-color: var(--color-oscuro-suave);">
+                </div>
+
+                <!-- Mensaje -->
+                <div id="editar-mensaje" class="hidden text-sm font-semibold rounded-lg px-4 py-2"></div>
+
+                <!-- Acciones -->
+                <div class="modal-action mt-0 pt-4" style="border-top: 1px solid #e5e7eb;">
+                    <button type="submit" class="btn px-8 bg-pulso-marca"
+                        style="color: var(--color-acento); border: none; font-weight: 700;">
+                        Guardar cambios
+                    </button>
+                    <button type="button" id="btn-cerrar-editar" class="btn btn-ghost px-8">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 
     <!-- Traemos jQuery para las llamadas AJAX -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -366,6 +504,76 @@
                     mensaje.style.color = "red";
                     mensaje.classList.remove("hidden");
                 });
+        });
+
+        // ===== Lógica del Modal de EDICIÓN =====
+        const modalEditar   = document.getElementById("modal-editar-lead");
+        const formEditar    = document.getElementById("form-editar-lead");
+        const btnCerrarEdit = document.getElementById("btn-cerrar-editar");
+        const mensajeEditar = document.getElementById("editar-mensaje");
+
+        // Delegación de evento: click en cualquier botón-lápiz de la tabla
+        document.getElementById("listado-leads").addEventListener("click", function(e) {
+            const btnEditar = e.target.closest(".btn-editar");
+            if (!btnEditar) return;
+
+            // Recuperamos el id del lead desde la fila
+            const fila = btnEditar.closest("tr");
+            document.getElementById("e-id").value        = fila.dataset.idLead;
+            document.getElementById("e-nombre").value    = fila.querySelector(".nombre-lead").textContent;
+            document.getElementById("e-empresa").value   = fila.querySelector(".empresa-lead").textContent;
+            document.getElementById("e-telefono").value  = fila.querySelector(".telefono-lead").textContent;
+            document.getElementById("e-email").value     = fila.querySelector(".email-lead").textContent;
+            document.getElementById("e-captacion").value = fila.querySelector(".captacion-lead").textContent;
+            document.getElementById("e-estado").value    = fila.querySelector(".estado-lead").textContent;
+            document.getElementById("e-fecha").value     = fila.querySelector(".fecha-de-contacto-lead").textContent;
+
+            mensajeEditar.classList.add("hidden");
+            modalEditar.showModal();
+        });
+
+        // Cerrar modal de edición
+        btnCerrarEdit.addEventListener("click", () => {
+            modalEditar.close();
+            formEditar.reset();
+        });
+
+        // Enviar los cambios al backend con PUT
+        formEditar.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const datos = {
+                id_lead:          document.getElementById("e-id").value,
+                nombre:           document.getElementById("e-nombre").value.trim(),
+                empresa:          document.getElementById("e-empresa").value.trim(),
+                telefono:         document.getElementById("e-telefono").value.trim(),
+                email:            document.getElementById("e-email").value.trim(),
+                fuente_captacion: document.getElementById("e-captacion").value,
+                estado:           document.getElementById("e-estado").value,
+                fecha_contacto:   document.getElementById("e-fecha").value,
+            };
+
+            fetch("/leads/editar", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(datos)
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (json.ok) {
+                    modalEditar.close();
+                    formEditar.reset();
+                    location.reload(); // Recarga la tabla con los datos actualizados
+                } else {
+                    mensajeEditar.textContent = "❌ " + (json.error || "Error al guardar.");
+                    mensajeEditar.style.color = "red";
+                    mensajeEditar.classList.remove("hidden");
+                }
+            })
+            .catch(() => {
+                mensajeEditar.textContent = "❌ No se pudo conectar con el servidor.";
+                mensajeEditar.style.color = "red";
+                mensajeEditar.classList.remove("hidden");
+            });
         });
     </script>
 

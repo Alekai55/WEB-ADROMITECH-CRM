@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from bd.repositorio_bd import obtener_leads, insertar_lead
+from bd.repositorio_bd import obtener_leads, insertar_lead, actualizar_lead
 
 app = Flask(__name__)
 
@@ -36,6 +36,26 @@ def nuevo_lead():
             jsonify({"ok": False, "error": "Error al insertar en la base de datos"}),
             500,
         )
+
+
+@app.route("/leads/editar", methods=["PUT"])
+def editar_lead():
+    """Recibe los datos actualizados del lead y ejecuta el UPDATE."""
+    datos = request.get_json()
+    exito = actualizar_lead(
+        id_lead=datos.get("id_lead"),
+        nombre=datos.get("nombre"),
+        empresa=datos.get("empresa"),
+        telefono=datos.get("telefono"),
+        email=datos.get("email"),
+        fuente_captacion=datos.get("fuente_captacion"),
+        estado=datos.get("estado"),
+        fecha_contacto=datos.get("fecha_contacto"),
+    )
+    if exito:
+        return jsonify({"ok": True}), 200
+    else:
+        return jsonify({"ok": False, "error": "No se pudo actualizar el lead"}), 500
 
 
 if __name__ == "__main__":

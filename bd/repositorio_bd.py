@@ -57,3 +57,31 @@ def insertar_lead(
             cursor.close()
         if conexion is not None and conexion.is_connected():
             conexion.close()
+
+
+def actualizar_lead(id_lead, nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto):
+    """Actualiza los datos de un lead existente por su id."""
+    conexion = crear_conexion()
+    if conexion is None:
+        return False
+
+    try:
+        cursor = conexion.cursor()
+        sql = """
+            UPDATE leads
+            SET nombre = %s, empresa = %s, telefono = %s, email = %s,
+                fuente_captacion = %s, estado = %s, fecha_contacto = %s
+            WHERE id_lead = %s
+        """
+        valores = (nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto, id_lead)
+        cursor.execute(sql, valores)
+        conexion.commit()
+        return cursor.rowcount > 0  # True si se actualizó al menos 1 fila
+    except Exception as e:
+        print(f"Error al actualizar lead: {e}")
+        return False
+    finally:
+        if "cursor" in locals() and cursor is not None:
+            cursor.close()
+        if conexion is not None and conexion.is_connected():
+            conexion.close()
