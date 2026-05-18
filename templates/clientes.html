@@ -1,0 +1,131 @@
+<!-- Nos basamos en la leads para reutilizar la tabla y listar los clientes -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    <meta name="description" content="Tabla de Clientes ">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo_trebol.png">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> <!--Insertar Tailwind-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <style>
+           /* Animación CSS para el Ticker superior */
+        @keyframes desplazamiento {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .animacion {
+            display: flex;
+            width: max-content;
+            animation: desplazamiento 16s linear infinite;
+        }
+
+        .animacion:hover {
+            animation-play-state: paused;
+            /* Se para al pasar el ratón */
+        }
+
+        /* Estilos del cuerpo de la tabla de clientes */
+        #listado-clientes tr {
+            background-color: #ffffff;
+            color: #111827;
+        }
+
+        #listado-clientes tr:hover {
+            background-color: rgba(0, 255, 128, 0.08);
+            transition: background-color 0.2s ease;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col" style="background-color: #f3f4f6;">
+    <!-- Insertamos el menú compartido -->
+    {% include 'menu.html' %}
+
+    <main class="flex-grow p-4 md:p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="titulo-seccion">Listado de Clientes</h1>
+        </div>
+
+        <div class="overflow-x-auto rounded-box shadow glow-verde">
+            <table class="table w-full" style="background-color: #fff;">
+                <!-- head -->
+                <thead style="background-color: var(--color-oscuro); color: var(--color-acento);">
+                    <tr>
+                        <th>ID</th>
+                        <th>Razón Social</th>
+                        <th>CIF/NIF</th>
+                        <th>Dirección Fiscal</th>
+                        <th>Contacto Principal</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Condiciones de pago</th>
+                    </tr>
+                </thead>
+                <tbody id="listado-clientes">
+                    <!-- Plantilla oculta para clonar -->
+                    <tr id="cliente-plantilla" style="display: none;">
+                        <th class="id-cliente"></th>
+                        <td class="razon-social-cliente"></td>
+                        <td class="nif-cif-cliente"></td>
+                        <td class="direccion-fiscal-cliente"></td>
+                        <td class="contacto-principal-cliente"></td>
+                        <td class="telefono-cliente"></td>
+                        <td class="email-cliente"></td>
+                        <td class="condiciones-pago-cliente"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background-color: var(--color-oscuro);" class="text-center bg-gray-900 text-gray-400 py-6 mt-10">
+        &copy; ADROMITECH 2026
+    </footer>
+
+    <!-- Traemos jQuery para las llamadas AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Al cargar la página, pedimos los clientes al backend por AJAX
+        $.getJSON("clientes").done(function (json) {
+            let listado = document.getElementById("listado-clientes");
+            let plantilla = document.getElementById("cliente-plantilla");
+
+            // Recorremos el array de clientes que nos devuelve Flask o el backend
+            json.forEach((element) => {
+                // Clonamos la plantilla HTML
+                let clon = plantilla.cloneNode(true);
+                clon.id = ""; // Evitamos duplicar el id
+                clon.style.display = "table-row"; // Mantiene la estructura correcta de la tabla
+
+                // Rellenamos los datos del cliente en el clon
+                clon.querySelector(".id-cliente").textContent = element.id_cliente || element.id; 
+                clon.querySelector(".razon-social-cliente").textContent = element.razon_social;
+                clon.querySelector(".nif-cif-cliente").textContent = element.nif_cif;
+                clon.querySelector(".direccion-fiscal-cliente").textContent = element.direccion_fiscal;
+                clon.querySelector(".contacto-principal-cliente").textContent = element.contacto_principal;
+                clon.querySelector(".telefono-cliente").textContent = element.telefono;
+                clon.querySelector(".email-cliente").textContent = element.email;
+                clon.querySelector(".condiciones-pago-cliente").textContent = element.condiciones_pago;
+
+                // Añadimos el clon ya relleno al contenedor principal
+                listado.appendChild(clon);
+            });
+        }).fail(function() {
+            console.error("Error al obtener los clientes. Asegúrate de que el endpoint devuelve un JSON válido.");
+        });
+    </script>
+</body>
+
+</html>

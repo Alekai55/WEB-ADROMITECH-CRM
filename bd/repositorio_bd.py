@@ -144,3 +144,24 @@ def eliminar_lead(id_lead):
             cursor.close()
         if conexion is not None and conexion.is_connected():
             conexion.close()
+
+# MÉTODO para obtener los clientes
+def obtener_cliente():
+    conexion = crear_conexion()
+    if conexion is None:
+        return []
+
+    try:
+        cursor = conexion.cursor(dictionary=True)
+        # Hacemos la consulta a la tabla 'cliente'
+        cursor.execute("SELECT * FROM cliente")
+        leads = cursor.fetchall()
+        return leads
+    except Exception as e:
+        print(f"Error al obtener clientes: {e}")
+        return []
+    finally:
+        if "cursor" in locals() and cursor is not None:
+            cursor.close()
+        if conexion is not None and conexion.is_connected():
+            conexion.close()

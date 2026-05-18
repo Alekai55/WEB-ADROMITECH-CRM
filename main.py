@@ -4,6 +4,7 @@ from bd.repositorio_bd import (
     insertar_lead,
     actualizar_lead,
     eliminar_lead,
+    obtener_cliente,
 )
 
 app = Flask(__name__)
@@ -18,6 +19,11 @@ def index():
 def admin_leads():
     """Renderiza la página de gestión de leads."""
     return render_template("leads.html")
+
+@app.route("/admin-clientes")  
+def admin_clientes():
+   """Renderiza la página de gestión de clientes."""
+   return render_template("clientes.html") 
 
 
 @app.route("/dashboard/stats")
@@ -38,6 +44,12 @@ def dashboard_stats():
 def leads():
     lista_leads = obtener_leads()
     return jsonify(lista_leads)
+
+@app.route("/clientes")
+def clientes():
+    lista_cliente = obtener_cliente()
+    return jsonify(lista_cliente)  
+
 
 
 # MÉTODO para que al arrancar la web, sepa leer los datos de la base de datos y permita insertar nuevos
