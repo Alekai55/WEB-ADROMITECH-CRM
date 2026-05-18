@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comerciales</title>
+    <meta name="description" content="Tabla de comerciales ">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo_trebol.png">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> <!--Insertar Tailwind-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <style>
+           /* Animación CSS para el Ticker superior */
+        @keyframes desplazamiento {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .animacion {
+            display: flex;
+            width: max-content;
+            animation: desplazamiento 16s linear infinite;
+        }
+
+        .animacion:hover {
+            animation-play-state: paused;
+            /* Se para al pasar el ratón */
+        }
+
+        /* Estilos del cuerpo de la tabla de comerciales */
+        #listado-comerciales tr {
+            background-color: #ffffff;
+            color: #111827;
+        }
+
+        #listado-comerciales tr:hover {
+            background-color: rgba(0, 255, 128, 0.08);
+            transition: background-color 0.2s ease;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col" style="background-color: #f3f4f6;">
+    <!-- Insertamos el menú compartido -->
+    {% include 'menu.html' %}
+
+    <main class="flex-grow p-4 md:p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="titulo-seccion">Listado de comerciales</h1>
+        </div>
+
+        <div class="overflow-x-auto rounded-box shadow glow-verde">
+            <table class="table w-full" style="background-color: #fff;">
+                <!-- head -->
+                <thead style="background-color: var(--color-oscuro); color: var(--color-acento);">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Zona Geográfica</th>
+                    </tr>
+                </thead>
+                <tbody id="listado-comerciales">
+                    <!-- Plantilla oculta para clonar -->
+                    <tr id="comercial-plantilla" style="display: none;">
+                        <th class="id-comercial"></th>
+                        <td class="nombre-comercial"></td>
+                        <td class="apellidos-comercial"></td>
+                        <td class="email-comercial"></td>
+                        <td class="telefono-comercial"></td>
+                        <td class="zona-geografica-comercial"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background-color: var(--color-oscuro);" class="text-center bg-gray-900 text-gray-400 py-6 mt-10">
+        &copy; ADROMITECH 2026
+    </footer>
+
+    <!-- Traemos jQuery para las llamadas AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Al cargar la página, pedimos los comerciales al backend por AJAX
+        $.getJSON("comerciales").done(function (json) {
+            let listado = document.getElementById("listado-comerciales");
+            let plantilla = document.getElementById("comercial-plantilla");
+
+            // Recorremos el array de comerciales que nos devuelve Flask o el backend
+            json.forEach((element) => {
+                // Clonamos la plantilla HTML
+                let clon = plantilla.cloneNode(true);
+                clon.id = ""; // Evitamos duplicar el id
+                clon.style.display = "table-row"; // Mantiene la estructura correcta de la tabla
+
+                // Rellenamos los datos del comercial en el clon
+                clon.querySelector(".id-comercial").textContent = element.id_comercial || element.id; 
+                clon.querySelector(".nombre-comercial").textContent = element.nombre;
+                clon.querySelector(".apellidos-comercial").textContent = element.apellidos;
+                clon.querySelector(".email-comercial").textContent = element.email;
+                clon.querySelector(".telefono-comercial").textContent = element.telefono;
+                clon.querySelector(".zona-geografica-comercial").textContent = element.zona || element.zona_geografica || element.zona_geografica_comercial;
+
+                // Añadimos el clon ya relleno al contenedor principal
+                listado.appendChild(clon);
+            });
+        }).fail(function() {
+            console.error("Error al obtener los comerciales. Asegúrate de que el endpoint devuelve un JSON válido.");
+        });
+    </script>
+</body>
+
+</html>
