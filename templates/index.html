@@ -154,15 +154,18 @@
     </footer>
 
     <script>
-        // Carga los totales desde el endpoint /dashboard/stats
+        // Se pide al servidor la ruta /dashboard/stats para obtener las estadísticas actualizadas y mostrarlas en las tarjetas
         fetch("/dashboard/stats")
-            .then(res => res.json())
+            .then(res => res.json()) //se guarda la respuesta del servidor en formato JSON
             .then(data => {
+                //Aqui, se actualizan los valores de las tarjetas con los datos obtenidos del servidor. 
+                //Si algún dato no está disponible, se muestra un guion "—" como valor predeterminado.
                 document.getElementById("stat-leads").textContent = data.leads ?? "—";
                 document.getElementById("stat-clientes").textContent = data.clientes ?? "—";
                 document.getElementById("stat-pedidos").textContent = data.pedidos ?? "—";
             })
             .catch(() => {
+                //Si el servidor no responde o hay un error en la solicitud, se muestra un guion "—" en todas las tarjetas para indicar que no se pudieron cargar los datos.
                 ["stat-leads", "stat-clientes", "stat-pedidos"].forEach(id => {
                     document.getElementById(id).textContent = "—";
                 });
