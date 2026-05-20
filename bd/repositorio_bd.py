@@ -185,3 +185,25 @@ def obtener_comercial():
             cursor.close()
         if conexion is not None and conexion.is_connected():
             conexion.close()
+ # MÉTODO para obtener los pedidos
+def obtener_pedidos():
+    conexion = crear_conexion()
+    if conexion is None:
+        return []
+
+    try:
+        cursor = conexion.cursor(dictionary=True)
+        # Hacemos la consulta a la tabla 'pedido'
+        cursor.execute("SELECT * FROM pedido")
+        pedidos = cursor.fetchall()
+        return pedidos
+    except Exception as e:
+        print(f"Error al obtener pedidos: {e}")
+        return []
+    finally:
+        if "cursor" in locals() and cursor is not None:
+            cursor.close()
+        if conexion is not None and conexion.is_connected():
+            conexion.close()           
+
+
