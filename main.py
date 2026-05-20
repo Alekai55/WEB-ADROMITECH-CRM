@@ -7,6 +7,7 @@ from bd.repositorio_bd import (
     obtener_cliente,
     obtener_comercial,
     obtener_pedidos,
+    obtener_facturas,
 )
 
 app = Flask(__name__)
@@ -36,6 +37,11 @@ def admin_comerciales():
 def admin_pedidos():
    """Renderiza la página de gestión de pedidos."""
    return render_template("pedidos.html") 
+
+@app.route("/admin-facturas")
+def admin_facturas():
+    """Renderiza la página de gestión de facturas."""
+    return render_template("facturas.html")
 
 
 @app.route("/dashboard/stats")
@@ -72,6 +78,10 @@ def pedidos():
     lista_pedidos = obtener_pedidos()
     return jsonify(lista_pedidos)  
 
+@app.route("/facturas")
+def facturas():
+    lista_facturas = obtener_facturas()
+    return jsonify(lista_facturas)
 
 # MÉTODO para que al arrancar la web, sepa leer los datos de la base de datos y permita insertar nuevos
 @app.route("/leads/nuevo", methods=["POST"])
