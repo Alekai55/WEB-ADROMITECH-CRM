@@ -20,9 +20,12 @@ def contar_registros(
     except Exception:
         return 0
     finally:
+        # El bloque finally SIEMPRE se ejecuta al final (haya habido error o no) para limpiar recursos.
         if "cursor" in locals() and cursor is not None:
+            # Comprobamos que el cursor se creó para evitar errores al cerrarlo. Si existe, lo cerramos.
             cursor.close()
         if conexion is not None and conexion.is_connected():
+            # Comprobamos que la conexión existe y sigue abierta. Si es así, la cerramos para no colapsar la BD.
             conexion.close()
 
 
