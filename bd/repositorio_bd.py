@@ -209,4 +209,27 @@ def obtener_pedidos():
         if conexion is not None and conexion.is_connected():
             conexion.close()           
 
+# MÉTODO para obtener las facturas
+def obtener_facturas():
+    conexion = crear_conexion()
+    if conexion is None:
+        return []
+
+    try:
+        cursor = conexion.cursor(dictionary=True)
+        # Hacemos la consulta a la tabla 'factura'
+        cursor.execute("SELECT * FROM factura")
+        facturas = cursor.fetchall()
+        return facturas
+    except Exception as e:
+        print(f"Error al obtener facturas: {e}")
+        return []
+    finally:
+        if "cursor" in locals() and cursor is not None:
+            cursor.close()
+        if conexion is not None and conexion.is_connected():
+            conexion.close()
+
+
+
 
