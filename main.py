@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from bd.repositorio_bd import (
     obtener_leads,
     insertar_lead,
-    actualizar_lead,
     eliminar_lead,
     obtener_cliente,
     obtener_comercial,
@@ -104,26 +103,6 @@ def nuevo_lead():
             500,
         )
 
-
-# MÉTODO para que al arrancar la web, pueda realizar cambios en la base de datos a través del respectivo botón
-@app.route("/leads/editar", methods=["PUT"])
-def editar_lead():
-    """Recibe los datos actualizados del lead y ejecuta el UPDATE."""
-    datos = request.get_json()
-    exito = actualizar_lead(
-        id_lead=datos.get("id_lead"),
-        nombre=datos.get("nombre"),
-        empresa=datos.get("empresa"),
-        telefono=datos.get("telefono"),
-        email=datos.get("email"),
-        fuente_captacion=datos.get("fuente_captacion"),
-        estado=datos.get("estado"),
-        fecha_contacto=datos.get("fecha_contacto"),
-    )
-    if exito:
-        return jsonify({"ok": True}), 200
-    else:
-        return jsonify({"ok": False, "error": "No se pudo actualizar el lead"}), 500
 
 
 # MÉTODO para que al arrancar la web, pueda eliminar datos de la base de datos

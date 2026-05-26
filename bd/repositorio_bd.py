@@ -87,45 +87,6 @@ def insertar_lead(
             conexion.close()
 
 
-# MÉTODO para que permita realizar un update a los datos de la tabla leads
-def actualizar_lead(
-    id_lead, nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto
-):
-    """Actualiza los datos de un lead existente por su id."""
-    conexion = crear_conexion()
-    if conexion is None:
-        return False
-
-    try:
-        cursor = conexion.cursor()
-        sql = """
-            UPDATE leads
-            SET nombre = %s, empresa = %s, telefono = %s, email = %s,
-                fuente_captacion = %s, estado = %s, fecha_contacto = %s
-            WHERE id_lead = %s
-        """
-        valores = (
-            nombre,
-            empresa,
-            telefono,
-            email,
-            fuente_captacion,
-            estado,
-            fecha_contacto,
-            id_lead,
-        )
-        cursor.execute(sql, valores)
-        conexion.commit()
-        return cursor.rowcount >= 0  # True si no hubo error (incluso si no se cambiaron datos)
-    except Exception as e:
-        print(f"Error al actualizar lead: {e}")
-        return False
-    finally:
-        if "cursor" in locals() and cursor is not None:
-            cursor.close()
-        if conexion is not None and conexion.is_connected():
-            conexion.close()
-
 
 # MÉTODO para interpretar el delete y así poder borrar los datos de un lead
 def eliminar_lead(id_lead):
