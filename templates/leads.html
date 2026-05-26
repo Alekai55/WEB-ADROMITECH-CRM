@@ -492,6 +492,8 @@
                                 let clon = plantilla.cloneNode(true);
                                 clon.id = "";
                                 clon.style.display = "table-row";
+                                clon.dataset.idLead = element.id_lead; // <--- Solución: faltaba esta línea
+
                                 clon.querySelector(".id-lead").textContent = element.id_lead;
                                 clon.querySelector(".nombre-lead").textContent = element.nombre;
                                 clon.querySelector(".empresa-lead").textContent = element.empresa;
@@ -537,7 +539,7 @@
 
             // Recuperamos el id del lead desde la fila
             const fila = btnEditar.closest("tr");
-            document.getElementById("e-id").value = fila.dataset.idLead;
+            document.getElementById("e-id").value = fila.dataset.idLead; 
             document.getElementById("e-nombre").value = fila.querySelector(".nombre-lead").textContent;
             document.getElementById("e-empresa").value = fila.querySelector(".empresa-lead").textContent;
             document.getElementById("e-telefono").value = fila.querySelector(".telefono-lead").textContent;

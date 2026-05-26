@@ -116,7 +116,7 @@ def actualizar_lead(
         )
         cursor.execute(sql, valores)
         conexion.commit()
-        return cursor.rowcount > 0  # True si se actualizó al menos 1 fila
+        return cursor.rowcount >= 0  # True si no hubo error (incluso si no se cambiaron datos)
     except Exception as e:
         print(f"Error al actualizar lead: {e}")
         return False
