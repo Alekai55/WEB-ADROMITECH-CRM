@@ -31,7 +31,7 @@ Este documento describe el entorno de desarrollo, las herramientas utilizadas y 
 
 * **Plataforma Cloud: Clever Cloud**
   * **Justificación:** Clever Cloud es un proveedor de plataforma como servicio (PaaS) que facilita mucho el paso de desarrollo a producción.
-  * **Alojamiento integral:** Permite tener tanto el entorno de ejecución de Python como el add-on de base de datos MySQL centralizados.
+  * **Alojamiento integral:** Permite tener tanto el entorno de ejecución de Python como la de base de datos MySQL centralizados.
   * Su despliegue directo desde Git significa que cada vez que subimos código, la plataforma se encarga de compilarlo, instalar las dependencias (`requirements.txt`) y reiniciar la aplicación automáticamente.
 
 ## 4. Librerías de Python utilizadas
