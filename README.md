@@ -3,7 +3,7 @@
 Este documento describe el entorno de desarrollo, las herramientas utilizadas y el stack tecnológico empleado para el proyecto **Adromitech CRM**, junto con la justificación de las decisiones tomadas.
 
 ## Acceso a la Aplicación
-- **URL de Producción:** [https://app-470ea328-bec6-4c96-9116-f78bf79498d2.cleverapps.io/admin-leads](https://app-470ea328-bec6-4c96-9116-f78bf79498d2.cleverapps.io/admin-leads)
+- **URL de Producción:** [https://app-470ea328-bec6-4c96-9116-f78bf79498d2.cleverapps.io/admin-leads](https://app-470ea328-bec6-4c96-9116-f78bf79498d2.cleverapps.io)
 
 ## 1. Entorno de Desarrollo
 
