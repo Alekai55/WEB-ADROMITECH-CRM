@@ -22,25 +22,30 @@ def admin_leads():
     """Renderiza la página de gestión de leads."""
     return render_template("leads.html")
 
-@app.route("/admin-clientes")  
+
+@app.route("/admin-clientes")
 def admin_clientes():
-   """Renderiza la página de gestión de clientes."""
-   return render_template("clientes.html") 
+    """Renderiza la página de gestión de clientes."""
+    return render_template("clientes.html")
 
-@app.route("/admin-comerciales")  
+
+@app.route("/admin-comerciales")
 def admin_comerciales():
-   """Renderiza la página de gestión de comerciales."""
-   return render_template("comerciales.html") 
+    """Renderiza la página de gestión de comerciales."""
+    return render_template("comerciales.html")
 
-@app.route("/admin-pedidos")  
+
+@app.route("/admin-pedidos")
 def admin_pedidos():
-   """Renderiza la página de gestión de pedidos."""
-   return render_template("pedidos.html") 
+    """Renderiza la página de gestión de pedidos."""
+    return render_template("pedidos.html")
+
 
 @app.route("/admin-facturas")
 def admin_facturas():
     """Renderiza la página de gestión de facturas."""
     return render_template("facturas.html")
+
 
 @app.route("/dashboard/stats")
 def dashboard_stats():
@@ -61,25 +66,30 @@ def leads():
     lista_leads = obtener_leads()
     return jsonify(lista_leads)
 
+
 @app.route("/clientes")
 def clientes():
     lista_cliente = obtener_cliente()
-    return jsonify(lista_cliente)  
+    return jsonify(lista_cliente)
+
 
 @app.route("/comerciales")
 def comerciales():
     lista_comercial = obtener_comercial()
-    return jsonify(lista_comercial)  
+    return jsonify(lista_comercial)
+
 
 @app.route("/pedidos")
 def pedidos():
     lista_pedidos = obtener_pedidos()
-    return jsonify(lista_pedidos)  
+    return jsonify(lista_pedidos)
+
 
 @app.route("/facturas")
 def facturas():
     lista_facturas = obtener_facturas()
     return jsonify(lista_facturas)
+
 
 # MÉTODO para que al arrancar la web, sepa leer los datos de la base de datos y permita insertar nuevos
 @app.route("/leads/nuevo", methods=["POST"])
@@ -104,7 +114,6 @@ def nuevo_lead():
         )
 
 
-
 # MÉTODO para que al arrancar la web, pueda eliminar datos de la base de datos
 @app.route("/leads/eliminar/<int:id_lead>", methods=["DELETE"])
 def eliminar_lead_route(id_lead):
@@ -118,4 +127,3 @@ def eliminar_lead_route(id_lead):
 
 if __name__ == "__main__":
     app.run(debug=True, port=5005)
-

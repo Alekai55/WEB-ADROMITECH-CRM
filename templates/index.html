@@ -146,35 +146,37 @@
 
         </div>
 
-    <!-- Carrusel -->
-    <section class="mt-8 mb-8 w-full">
-        <div class="mb-6">
-            <h2 class="titulo-seccion w-fit">Nuestros productos</h2>
-        </div>
-        <div class="relative h-94 overflow-hidden rounded-xl max-w-2xl mx-auto mt-10 shadow-md flex items-center justify-center">
-            <img id="carrusel" class="w-full h-full object-contain transition-opacity duration-700" src="/static/assets/img/imagen.png" alt="Carrusel">
-        </div>
+        <!-- Carrusel -->
+        <section class="mt-8 mb-8 w-full">
+            <div class="mb-6">
+                <h2 class="titulo-seccion w-fit">Nuestros productos</h2>
+            </div>
+            <div
+                class="relative h-94 overflow-hidden rounded-xl max-w-2xl mx-auto mt-10 shadow-md flex items-center justify-center">
+                <img id="carrusel" class="w-full h-full object-contain transition-opacity duration-700"
+                    src="/static/assets/img/imagen1.png" alt="Carrusel">
+            </div>
 
-        <!-- Botones -->
-        <div class="flex justify-center gap-6 mt-4">
-            <button onclick="anterior()" style="background-color: var(--color-acento); color: var(--color-oscuro);"
-                class="rounded-full p-3 transition-opacity shadow-md hover:opacity-80">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
-                    <path fill-rule="evenodd"
-                        d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z"
-                        clip-rule="evenodd" />
-                </svg>
-            </button>
-            <button onclick="siguiente()" style="background-color: var(--color-acento); color: var(--color-oscuro);"
-                class="rounded-full p-3 transition-opacity shadow-md hover:opacity-80">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
-                    <path fill-rule="evenodd"
-                        d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
-                        clip-rule="evenodd" />
-                </svg>
-            </button>
-        </div>
-    </section>
+            <!-- Botones -->
+            <div class="flex justify-center gap-6 mt-4">
+                <button onclick="anterior()" style="background-color: var(--color-acento); color: var(--color-oscuro);"
+                    class="rounded-full p-3 transition-opacity shadow-md hover:opacity-80">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                        <path fill-rule="evenodd"
+                            d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <button onclick="siguiente()" style="background-color: var(--color-acento); color: var(--color-oscuro);"
+                    class="rounded-full p-3 transition-opacity shadow-md hover:opacity-80">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                        <path fill-rule="evenodd"
+                            d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </section>
 
     </main>
 
@@ -201,20 +203,20 @@
                 });
             });
 
-        // Carrusel sencillo: usa el patrón `imagen.png` en el `src` de `#carousel`
+        // Carrusel sencillo: usa el patrón `imagen.png` en el `src` de `#carrusel`
         var numero = 1;
-        var max = 4; //esto lo cambio si meto más imagenes
+        var max = 5; //esto lo cambio si meto más imagenes
 
         function siguiente() {
             numero++;
             if (numero > max) { numero = 1; }
-            document.getElementById("carrusel").src = "/static/assets/img/imagen"+numero+".png";
+            document.getElementById("carrusel").src = "/static/assets/img/imagen" + numero + ".png";
         }
 
         function anterior() {
             numero--;
             if (numero < 1) { numero = max; }
-            document.getElementById("carrusel").src = "/static/assets/img/imagen"+numero+".png";
+            document.getElementById("carrusel").src = "/static/assets/img/imagen" + numero + ".png";
         }
     </script>
 

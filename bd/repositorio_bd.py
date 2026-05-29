@@ -87,7 +87,6 @@ def insertar_lead(
             conexion.close()
 
 
-
 # MÉTODO para interpretar el delete y así poder borrar los datos de un lead
 def eliminar_lead(id_lead):
     """Elimina un lead de la base de datos por su id."""
@@ -109,6 +108,7 @@ def eliminar_lead(id_lead):
         if conexion is not None and conexion.is_connected():
             conexion.close()
 
+
 # MÉTODO para obtener los clientes
 def obtener_cliente():
     conexion = crear_conexion()
@@ -129,6 +129,8 @@ def obtener_cliente():
             cursor.close()
         if conexion is not None and conexion.is_connected():
             conexion.close()
+
+
 # MÉTODO para obtener los comerciales
 def obtener_comercial():
     conexion = crear_conexion()
@@ -149,7 +151,9 @@ def obtener_comercial():
             cursor.close()
         if conexion is not None and conexion.is_connected():
             conexion.close()
- # MÉTODO para obtener los pedidos
+
+
+# MÉTODO para obtener los pedidos
 def obtener_pedidos():
     conexion = crear_conexion()
     if conexion is None:
@@ -168,7 +172,8 @@ def obtener_pedidos():
         if "cursor" in locals() and cursor is not None:
             cursor.close()
         if conexion is not None and conexion.is_connected():
-            conexion.close()           
+            conexion.close()
+
 
 # MÉTODO para obtener las facturas
 def obtener_facturas():
@@ -190,7 +195,3 @@ def obtener_facturas():
             cursor.close()
         if conexion is not None and conexion.is_connected():
             conexion.close()
-
-
-
-

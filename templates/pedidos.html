@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/static/assets/css/style.css">
     <style>
-           /* Animación CSS para el Ticker superior */
+        /* Animación CSS para el Ticker superior */
         @keyframes desplazamiento {
             0% {
                 transform: translateX(100%);
@@ -103,7 +103,7 @@
                 clon.style.display = "table-row"; // Mantiene la estructura correcta de la tabla
 
                 // Rellenamos los datos del pedido en el clon
-                clon.querySelector(".id-pedido").textContent = element.id_pedido || element.id; 
+                clon.querySelector(".id-pedido").textContent = element.id_pedido || element.id;
                 clon.querySelector(".fecha-pedido").textContent = element.fecha_pedido || '-';
                 clon.querySelector(".estado-pedido").textContent = element.estado || 'pendiente';
                 clon.querySelector(".id-cliente-pedido").textContent = element.id_cliente || '-';

@@ -1,0 +1,162 @@
+En repositorio:bd:
+Funcionn para la pagina de inicio mostrar las estadisticas:
+
+    def contar_registros(
+        tabla,
+    ):  # funcion para contar registros de cualquier tabla de la base de datos
+        """Devuelve el total de filas de una tabla. Devuelve 0 si falla o la tabla no existe."""
+        conexion = crear_conexion()
+        if conexion is None:
+            return 0
+        try:
+            cursor = conexion.cursor()
+            cursor.execute(
+                f"SELECT COUNT(*) FROM `{tabla}`"
+            )  # ejecución de la consulta para cualquier tabla, las `` sirven para evitar errores de nombres
+            resultado = (
+                cursor.fetchone()
+            )  # esto sirve para traer solo una fila (es decir cuenta el numero de registros de la tabla y lo devuelve como número)
+            return resultado[0] if resultado else 0
+        except Exception:
+            return 0
+        finally:
+            # El bloque finally SIEMPRE se ejecuta al final (haya habido error o no) para limpiar recursos.
+            if "cursor" in locals() and cursor is not None:
+                # Comprobamos que el cursor se creó para evitar errores al cerrarlo. Si existe, lo cerramos.
+                cursor.close()
+            if conexion is not None and conexion.is_connected():
+                # Comprobamos que la conexión existe y sigue abierta. Si es así, la cerramos para no colapsar la BD.
+                conexion.close()
+
+Y en indenx. html, para agregarlos:
+// Se pide al servidor la ruta /dashboard/stats para obtener las estadísticas actualizadas y mostrarlas en las tarjetas
+        fetch("/dashboard/stats")
+            .then(res => res.json()) //se guarda la respuesta del servidor en formato JSON
+            .then(data => {
+                //Aqui, se actualizan los valores de las tarjetas con los datos obtenidos del servidor. 
+                //Si algún dato no está disponible, se muestra un guion "—" como valor predeterminado.
+                document.getElementById("stat-leads").textContent = data.leads ?? "—";
+                document.getElementById("stat-clientes").textContent = data.clientes ?? "—";
+                document.getElementById("stat-pedidos").textContent = data.pedidos ?? "—";
+            })
+            .catch(() => {
+                //Si el servidor no responde o hay un error en la solicitud, se muestra un guion "—" en todas las tarjetas para indicar que no se pudieron cargar los datos.
+                ["stat-leads", "stat-clientes", "stat-pedidos"].forEach(id => {
+                    document.getElementById(id).textContent = "—";
+                });
+            });
+
+
+En index.html: el script del carrusel:
+var numero = 1;
+        var max = 5; //esto lo cambio si meto más imagenes
+
+        function siguiente() {
+            numero++;
+            if (numero > max) { numero = 1; }
+            document.getElementById("carrusel").src = "/static/assets/img/imagen" + numero + ".png";
+        }
+
+        function anterior() {
+            numero--;
+            if (numero < 1) { numero = max; }
+            document.getElementById("carrusel").src = "/static/assets/img/imagen" + numero + ".png";
+        }            
+
+En repositorio.bd:    
+MÉTODO para que la web interprete el lenguaje sql y tome los datos de la tabla leads para insertar los nuevos correctamente
+    def insertar_lead(
+        nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto
+    ):
+        """Inserta un nuevo lead en la base de datos."""
+        conexion = crear_conexion()
+        if conexion is None:
+            return False
+
+        try:
+            cursor = conexion.cursor()
+            sql = """
+                INSERT INTO leads (nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+            valores = (
+                nombre,
+                empresa,
+                telefono,
+                email,
+                fuente_captacion,
+                estado,
+                fecha_contacto,
+            )
+            cursor.execute(sql, valores)
+            conexion.commit()
+            return True
+        except Exception as e:
+            print(f"Error al insertar lead: {e}")
+            return False
+        finally:
+            if "cursor" in locals() and cursor is not None:
+                cursor.close()
+            if conexion is not None and conexion.is_connected():
+                conexion.close()
+
+En main.py:
+# MÉTODO para que al arrancar la web, sepa leer los datos de la base de datos y permita insertar nuevos
+    @app.route("/leads/nuevo", methods=["POST"])
+    def nuevo_lead():
+        """Recibe los datos del formulario modal y los inserta en la BD."""
+        datos = request.get_json()
+        exito = insertar_lead(
+            nombre=datos.get("nombre"),
+            empresa=datos.get("empresa"),
+            telefono=datos.get("telefono"),
+            email=datos.get("email"),
+            fuente_captacion=datos.get("fuente_captacion"),
+            estado=datos.get("estado"),
+            fecha_contacto=datos.get("fecha_contacto"),
+        )
+        if exito:
+            return jsonify({"ok": True}), 201
+        else:
+            return (
+                jsonify({"ok": False, "error": "Error al insertar en la base de datos"}),
+                500,
+            )            
+
+En leads.html:
+// Al cargar la página, pedimos los clientes al backend por AJAX
+        $.getJSON("leads").done(function (json) {
+            let listado = document.getElementById("listado-leads");
+            let plantilla = document.getElementById("leads-plantilla");
+
+            // Recorremos el array de clientes que nos devuelve Flask
+            json.forEach((element) => {
+                // Clonamos la plantilla HTML
+                let clon = plantilla.cloneNode(true);
+                clon.id = ""; // Evitamos duplicar el id
+                clon.style.display = "table-row"; // Mantiene la estructura correcta de la tabla
+                clon.dataset.idLead = element.id_lead; // Necesario para los botones de editar y eliminar
+
+                // Rellenamos los datos del cliente en el clon
+                clon.querySelector(".id-lead").textContent = element.id_lead;
+                clon.querySelector(".nombre-lead").textContent = element.nombre;
+                clon.querySelector(".empresa-lead").textContent = element.empresa;
+                clon.querySelector(".telefono-lead").textContent = element.telefono;
+                clon.querySelector(".email-lead").textContent = element.email;
+                clon.querySelector(".captacion-lead").textContent = element.fuente_captacion;
+                clon.querySelector(".estado-lead").textContent = element.estado;
+                clon.querySelector(".fecha-de-contacto-lead").textContent = element.fecha_contacto;
+
+                // Pintamos el estado según sea activo o inactivo
+                let estadoSpan = clon.querySelector(".estado-cliente");
+                estadoSpan.textContent = element.estado.toUpperCase();
+                if (element.estado === 'activo') {
+                    estadoSpan.classList.add("bg-green-100", "text-green-800");
+                } else {
+                    estadoSpan.classList.add("bg-red-100", "text-red-800");
+                }
+
+                // Añadimos el clon ya relleno al contenedor principal
+                listado.appendChild(clon);
+            });
+        });            
