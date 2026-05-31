@@ -7,6 +7,7 @@ from bd.repositorio_bd import (
     obtener_comercial,
     obtener_pedidos,
     obtener_facturas,
+    contar_registros,
 )
 
 app = Flask(__name__)
@@ -50,8 +51,7 @@ def admin_facturas():
 @app.route("/dashboard/stats")
 def dashboard_stats():
     """Devuelve los totales de leads, clientes y pedidos para el dashboard."""
-    from bd.repositorio_bd import contar_registros
-
+    # jsonify convierte el diccionario a texto plano json para que pueda llegar al frontend
     return jsonify(
         {
             "leads": contar_registros("leads"),
@@ -95,9 +95,9 @@ def facturas():
 @app.route("/leads/nuevo", methods=["POST"])
 def nuevo_lead():
     """Recibe los datos del formulario modal y los inserta en la BD."""
-    datos = request.get_json()
+    datos = request.get_json() #Aquí cogemos la informacion que nos envia el frontend y la convierte en un diccionario 
     exito = insertar_lead(
-        nombre=datos.get("nombre"),
+        nombre=datos.get("nombre"), #datos.get() permite acceder a las claves del diccionario, si no existe una clave, devuelve None
         empresa=datos.get("empresa"),
         telefono=datos.get("telefono"),
         email=datos.get("email"),
@@ -106,17 +106,19 @@ def nuevo_lead():
         fecha_contacto=datos.get("fecha_contacto"),
     )
     if exito:
-        return jsonify({"ok": True}), 201
+        return jsonify({"ok": True}), 201 #201 significa que la petición se ha completado correctamente
     else:
         return (
             jsonify({"ok": False, "error": "Error al insertar en la base de datos"}),
-            500,
-        )
+            500, 
+        ) #500 significa que ha habido un error en el servidor
 
 
 # MÉTODO para que al arrancar la web, pueda eliminar datos de la base de datos
+#<int:id_lead> significa que flask interpreta que cualquier cosa que vaya después de /leads/eliminar/
+#es una variable numérica entera (un entero int) y se la pasa automáticamente como argumento a la función de Python (id_lead)
 @app.route("/leads/eliminar/<int:id_lead>", methods=["DELETE"])
-def eliminar_lead_route(id_lead):
+def eliminar_lead_route(id_lead): 
     """Elimina un lead por su id."""
     exito = eliminar_lead(id_lead)
     if exito:

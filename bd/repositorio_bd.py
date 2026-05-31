@@ -10,13 +10,12 @@ def contar_registros(
         return 0
     try:
         cursor = conexion.cursor()
-        cursor.execute(
-            f"SELECT COUNT(*) FROM `{tabla}`"
-        )  # ejecución de la consulta para cualquier tabla, las `` sirven para evitar errores de nombres
-        resultado = (
-            cursor.fetchone()
-        )  # esto sirve para traer solo una fila (es decir cuenta el numero de registros de la tabla y lo devuelve como número)
+        cursor.execute(f"SELECT COUNT(*) FROM `{tabla}`")
+        # ejecución de la consulta para cualquier tabla, las `` sirven para evitar errores de nombres
+        resultado = cursor.fetchone()
+        # esto sirve para traer solo una fila (es decir cuenta el numero de registros de la tabla y lo devuelve como número)
         return resultado[0] if resultado else 0
+        #Devuelve la primera posicion de la tupla para obtener el resultado, si no hay nada, devuelve 0
     except Exception:
         return 0
     finally:
@@ -36,6 +35,7 @@ def obtener_leads():
 
     try:
         cursor = conexion.cursor(dictionary=True)
+        # Al poner dictionary=True, el cursor devuelve resultados como diccionarios en lugar de tuplas, lo que facilita el trabajo con los datos
         # Hacemos la consulta a la tabla 'leads'
         cursor.execute("SELECT * FROM leads")
         leads = cursor.fetchall()
@@ -75,7 +75,7 @@ def insertar_lead(
             fecha_contacto,
         )
         cursor.execute(sql, valores)
-        conexion.commit()
+        conexion.commit()  # Esto es lo que hace que se guarden los cambios en la base de datos, es importante ponerlo, porque sino, al cerrar la conexión, se pierden
         return True
     except Exception as e:
         print(f"Error al insertar lead: {e}")

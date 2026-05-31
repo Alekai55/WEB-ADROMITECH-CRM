@@ -1,4 +1,4 @@
-<!-- MENU RESPONSIVO COMPARTIDO  -->
+<!-- MENU RESPONSIVO COMPARTIDO EN TODOS LOS HTML -->
 
 <!-- Barra superior animada con estadísticas  -->
 <div style="background-color: var(--color-oscuro-medio); overflow: hidden;">
@@ -11,26 +11,29 @@
     </div>
 </div>
 
-<!-- Barra de navegación principal  -->
+<!-- Barra de navegación principal -->
 <nav style="background-color: var(--color-oscuro);" class="shadow-md text-white">
+    <!-- Tailwind: max-w-7xl mx-auto px-6 flex items-center justify-between py-4 -->
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between py-4">
 
-        <!-- Logo del sitio -->
+        <!-- Logo del sitio (Tailwind: flex items-center gap-3) -->
         <div class="flex items-center gap-3">
             <img src="/static/assets/img/logo_trebol.png" alt="Logo ADROMITECH" class="h-9 w-9 object-contain">
             <span class="text-2xl font-extrabold tracking-wide" style="color: var(--color-acento);">ADROMITECH
                 CRM</span>
         </div>
 
-        <!-- Botón de Hamburguesa para pantallas pequeñas (móviles) -->
+        <!-- Botón de Hamburguesa para pantallas pequeñas (móviles)  -->
         <button id="hamburguesa" class="md:hidden flex flex-col gap-1.5 p-2">
+            <!--a partir de pantalla mediana se hace invisible-->
             <span class="w-6 h-0.5" style="background-color: var(--color-acento);"></span>
             <span class="w-6 h-0.5" style="background-color: var(--color-acento);"></span>
             <span class="w-6 h-0.5" style="background-color: var(--color-acento);"></span>
         </button>
 
-        <!-- Menú normal para pantallas grandes -->
+        <!-- Menú normal para pantallas grandes  -->
         <ul class="hidden md:flex gap-8 text-sm font-semibold">
+            <!--el menu es invisible pero a partir de medianas se hace visible-->
             <li><a href="/" class="nav-link transition-colors duration-200">Inicio</a></li>
             <li><a href="/admin-leads" class="nav-link transition-colors duration-200">Leads</a></li>
             <li><a href="/admin-clientes" class="nav-link transition-colors duration-200">Clientes</a></li>
@@ -42,6 +45,7 @@
 
     <!-- Menú desplegable para pantallas pequeñas (móviles) -->
     <div id="menu-movil" class="hidden px-6 pb-4 pt-3" style="background-color: var(--color-oscuro-medio);">
+        <!--en pantallas pequenas cuando se le de clic al boton hamburguesa se despliega el menu-->
         <ul class="flex flex-col gap-3 text-sm font-semibold">
             <li><a href="/" class="nav-link transition-colors duration-200">Inicio</a></li>
             <li><a href="/admin-leads" class="nav-link transition-colors duration-200">Leads</a></li>
@@ -69,4 +73,5 @@
     document.getElementById("hamburguesa").addEventListener("click", function () {
         document.getElementById("menu-movil").classList.toggle("hidden")
     })
+    /* Con toggle al hacer clic se abre y se cierra el menu */
 </script>

@@ -11,28 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/static/assets/css/style.css">
     <style>
-        /* Animación CSS para el Ticker superior */
-        @keyframes desplazamiento {
-            0% {
-                transform: translateX(100%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        .animacion {
-            display: flex;
-            width: max-content;
-            animation: desplazamiento 16s linear infinite;
-        }
-
-        .animacion:hover {
-            animation-play-state: paused;
-            /* Se para al pasar el ratón */
-        }
-
         /* Estilos del cuerpo de la tabla de pedidos */
         #listado-pedidos tr {
             background-color: #ffffff;
@@ -50,11 +28,13 @@
     <!-- Insertamos el menú compartido -->
     {% include 'menu.html' %}
 
+    <!-- Tailwind: flex-grow y padding -->
     <main class="flex-grow p-4 md:p-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="titulo-seccion">Listado de Pedidos</h1>
         </div>
 
+        <!-- DaisyUI: table | Tailwind: rounded-box shadow -->
         <div class="overflow-x-auto rounded-box shadow glow-verde">
             <table class="table w-full" style="background-color: #fff;">
                 <!-- head -->

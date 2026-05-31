@@ -5,7 +5,7 @@
      Acento:  rgb(0, 255, 128)  → verde neón brillante
    ============================================================ */
 
-/* --- Variables CSS globales (úsalas en todos los HTML) ------- */
+/* --- Variables CSS globales (uasadas en todos los HTML) ------- */
 :root {
     --color-oscuro: rgb(48, 10, 71);
     --color-oscuro-medio: rgb(72, 18, 105);
@@ -17,7 +17,9 @@
     --color-gris-texto: #d1d5db;
 }
 
-/* --- Keyframes de color para reutilizar en cualquier HTML ---- */
+/* --- Keyframes(crear animaciones) de color para reutilizar en cualquier HTML ---- */
+/*keyframes: define el estado de un elemento que cambia entre diferentes puntos de tiempo 0-50-100%*/
+
 
 /* 1. Fondo que pulsa entre el morado oscuro y el verde neón */
 @keyframes pulso-marca {
@@ -50,6 +52,7 @@
 }
 
 /* 3. Borde que hace glow con el verde neón */
+/* genera un brillo alrededor del elemento */
 @keyframes glow-borde {
     0% {
         box-shadow: 0 0 0px var(--color-acento-glow);
@@ -65,6 +68,7 @@
 }
 
 /* 4. Gradiente animado de fondo de pantalla completo */
+/* fondo degradado animado que cambia de color */
 @keyframes gradiente-fondo {
     0% {
         background-position: 0% 50%;
@@ -105,12 +109,53 @@
     }
 }
 
-/* --- Clases de utilidad listas para usar en tus plantillas --- */
+/* 7. Text-shadow neón pulsante para títulos de sección */
+@keyframes neon-titulo {
+    0% {
+        text-shadow: 0 0 0px transparent;
+    }
+
+    50% {
+        text-shadow: 0 0 10px var(--color-acento), 0 0 22px var(--color-acento-glow);
+    }
+
+    100% {
+        text-shadow: 0 0 0px transparent;
+    }
+}
+
+
+
+
+/* Animación para el menú dinámico superior que se incluye en todos los HTMLs, por lo que los keyframes se deben incluir en todos los HTMl*/
+@keyframes desplazamiento {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+/*Clases para el menú dinámico superior*/
+.animacion {
+    display: flex;
+    width: max-content;
+    animation: desplazamiento 16s linear infinite;
+}
+
+.animacion:hover {
+    animation-play-state: paused;
+}
+
+
+
+/* --- Clases de utilidad de las otras animaciones para usarlas en los HTML --- */
 
 /* Aplica el fondo pulsante de marca */
 .bg-pulso-marca {
     animation: pulso-marca 4s ease-in-out infinite;
-}
+} /* 4 segundos, sale y entra suavemente, acelera y vuelve a suave, se repiten infinitas veces */
 
 /* Aplica el brillo de texto verde */
 .texto-brillo {
@@ -144,30 +189,15 @@
     animation: entrada-abajo 0.5s ease both;
 }
 
-/* 7. Text-shadow neón pulsante para títulos de sección */
-@keyframes neon-titulo {
-    0% {
-        text-shadow: 0 0 0px transparent;
-    }
 
-    50% {
-        text-shadow: 0 0 10px var(--color-acento), 0 0 22px var(--color-acento-glow);
-    }
-
-    100% {
-        text-shadow: 0 0 0px transparent;
-    }
-}
 
 /* Título de sección grande con contorno neón animado */
 .titulo-seccion {
     font-size: 2rem;
-    /* 32px — más grande que text-2xl */
     font-weight: 800;
     letter-spacing: 0.02em;
     color: var(--color-oscuro);
     animation: neon-titulo 3s ease-in-out infinite;
-    /* Contorno sutil usando outline */
     padding: 4px 12px;
     border-left: 4px solid var(--color-acento);
 }

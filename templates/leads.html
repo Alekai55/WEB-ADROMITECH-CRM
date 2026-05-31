@@ -9,30 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> <!--Insertar Tailwind-->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <!--Insertar DaisyUI-->
-    <link rel="stylesheet" href="/static/assets/css/style.css"> <!--Llamar al archivo css que contiene los keywords -->
+    <link rel="stylesheet" href="/static/assets/css/style.css"> <!--Llamar al archivo css  -->
     <style>
-        /* Animación CSS para el Ticker superior */
-        @keyframes desplazamiento {
-            0% {
-                transform: translateX(100%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        .animacion {
-            display: flex;
-            width: max-content;
-            animation: desplazamiento 16s linear infinite;
-        }
-
-        .animacion:hover {
-            animation-play-state: paused;
-            /* Se para al pasar el ratón */
-        }
-
         /* Estilos del cuerpo de la tabla de leads */
         #listado-leads tr {
             background-color: #ffffff;
@@ -55,11 +33,14 @@
     <main class="flex-grow p-4 md:p-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="titulo-seccion">Listado de Leads</h1>
+            <!-- Botón DaisyUI: btn -->
             <button id="btn-nuevo-lead" class="btn"
                 style="background-color: var(--color-oscuro); color: var(--color-acento); border: none;">Nuevo
                 Contacto</button>
         </div>
 
+        <!-- DaisyUI: table y Tailwind: rounded-box shadow -->
+        <!-- Gracias a overflow-x-auto la tabla se adaptará al ancho de la pantalla y así no desborda en móvil -->
         <div class="overflow-x-auto rounded-box shadow glow-verde">
             <table class="table w-full" style="background-color: #fff;">
                 <!-- head -->
@@ -91,7 +72,7 @@
                         <td class="fecha-de-contacto-lead"></td>
                         <td class="flex gap-2 items-center">
 
-                            <!-- Icono papelera: elimina el lead con confirmación -->
+                            <!-- Icono papelera: elimina el lead con confirmación (Botón DaisyUI) -->
                             <button class="btn-eliminar btn btn-xs" title="Eliminar lead"
                                 style="background-color: #dc2626; color: #fff; border: none; padding: 4px 8px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
@@ -115,10 +96,12 @@
         &copy; ADROMITECH 2026
     </footer>
 
-    <!-- ===== MODAL: Formulario nuevo lead ===== -->
+    <!-- Formulario nuevo lead (DaisyUI: modal) -->
+    <!-- dialog es un elemento de html5 que incorpora que se abra y se cierre el modal y que se pueda salir 
+     pulsando fuera del modal o con un boton de cerrar (el x del modal). DaisyUI lo oculta por defecto y le pone un fondo oscurecido para que destaque.-->
     <dialog id="modal-nuevo-lead" class="modal modal-bottom sm:modal-middle">
-        <!-- max-w-3xl: tarjeta grande | glow-verde: neón | animar-entrada: desliza al abrirse -->
-        <div class="modal-box w-full max-w-3xl glow-verde animar-entrada"
+        <!-- Tailwind:w-full: ocupa todo en pantalla pequeña, max-w-3xl: tarjeta grande | glow-verde: neón -->
+        <div class="modal-box w-full max-w-3xl glow-verde"
             style="background-color: #fff; padding: 0; overflow-y: auto; max-height: 92vh;">
 
             <!-- ── Cabecera ── -->
@@ -136,18 +119,20 @@
 
                 <!-- Fila 1: Nombre + Empresa -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <!-- apartado del nombre con placeholder orientativo para incluir nombre y apellido -->
+                    <!-- apartado del nombre con placeholder orientativo para incluir nombre y apellido | DaisyUI: form-control -->
                     <div class="form-control">
+                        <!-- DaisyUI: label le da formato a la etiqueta-->
                         <label class="label pb-1">
                             <span class="label-text font-bold"
                                 style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Nombre
                                 *</span>
                         </label>
+                        <!-- DaisyUI: input le da formato al input-->
                         <input id="f-nombre" type="text" placeholder="Nombre completo"
                             class="input input-bordered w-full" required
                             style="border-color: var(--color-oscuro-suave); focus-outline: none;">
                     </div>
-                    <!-- apartado de la empresa para poner su nombre sin excepciones definidas -->
+                    <!-- apartado de la empresa para poner su nombre | DaisyUI: form-control -->
                     <div class="form-control">
                         <label class="label pb-1">
                             <span class="label-text font-bold"
@@ -160,7 +145,7 @@
 
                 <!-- Fila 2: Teléfono + Email -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <!-- apartado del teléfono con placeholder de referencia -->
+                    <!-- apartado del teléfono con placeholder de referencia | DaisyUI: form-control -->
                     <div class="form-control">
                         <label class="label pb-1">
                             <span class="label-text font-bold"
@@ -169,12 +154,13 @@
                         <input id="f-telefono" type="tel" maxlength="9" placeholder="600 000 000"
                             class="input input-bordered w-full" style="border-color: var(--color-oscuro-suave);">
                     </div>
-                    <!-- apartado del email con placeholder orientativo -->
+                    <!-- apartado del email con placeholder orientativo | DaisyUI: form-control -->
                     <div class="form-control">
                         <label class="label pb-1">
                             <span class="label-text font-bold"
                                 style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Email</span>
                         </label>
+                        <!-- DaisyUI: input y input-bordered -->
                         <input id="f-email" type="email" placeholder="correo@ejemplo.com"
                             class="input input-bordered w-full" style="border-color: var(--color-oscuro-suave);">
                     </div>
@@ -182,12 +168,13 @@
 
                 <!-- Fila 3: Captación + Estado -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <!-- captación: opciones seleccionables para evitar confusión -->
+                    <!-- captación: opciones seleccionables para evitar confusión | DaisyUI: form-control -->
                     <div class="form-control">
                         <label class="label pb-1">
                             <span class="label-text font-bold"
                                 style="color: var(--color-oscuro); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">Captación</span>
                         </label>
+                        <!-- DaisyUI: select  -->
                         <select id="f-captacion" class="select select-bordered w-full"
                             style="border-color: var(--color-oscuro-suave);">
                             <option value="">Seleccionar...</option>
@@ -199,7 +186,7 @@
                             <option>Otro</option>
                         </select>
                     </div>
-                    <!-- estado: opciones seleccionables -->
+                    <!-- estado: opciones seleccionables | DaisyUI: form-control -->
                     <div class="form-control">
                         <label class="label pb-1">
                             <span class="label-text font-bold"
@@ -217,7 +204,7 @@
                 </div>
 
                 <!-- Fila 4: Fecha (columna completa) -->
-                <!-- tipo date para evitar confusión con el formato -->
+                <!-- tipo date para evitar confusión con el formato | DaisyUI: form-control -->
                 <div class="form-control">
                     <label class="label pb-1">
                         <span class="label-text font-bold"
@@ -231,7 +218,7 @@
                 <!-- Mensaje de error/éxito -->
                 <div id="form-mensaje" class="hidden text-sm font-semibold rounded-lg px-4 py-2"></div>
 
-                <!-- Acciones -->
+                <!-- Acciones (Botones DaisyUI) -->
                 <div class="modal-action mt-0 pt-4" style="border-top: 1px solid #e5e7eb;">
                     <!-- bg-pulso-marca: fondo oscuro pulsante animado -->
                     <button type="submit" id="btn-guardar" class="btn px-8 bg-pulso-marca"
@@ -323,8 +310,9 @@
 
         // Enviar el formulario por AJAX
         form.addEventListener("submit", function (e) {
-            e.preventDefault(); // Evitamos que recargue la página
+            e.preventDefault(); // Evitamos que recargue la página al darle a guardar
 
+            //aqui cogemos la informacion del formulario y la guardamos en una variable llamada datos
             const datos = {
                 nombre: document.getElementById("f-nombre").value.trim(),
                 empresa: document.getElementById("f-empresa").value.trim(),
@@ -334,30 +322,36 @@
                 estado: document.getElementById("f-estado").value,
                 fecha_contacto: document.getElementById("f-fecha").value,
             };
-
+            //aqui cogemos la informacion de datos y se la mandamos por http a main.py en la ruta /leads/nuevo
             fetch("/leads/nuevo", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(datos)
+                headers: { "Content-Type": "application/json" }, //  le dice al servidor que le estamos enviando datos en formato JSON y así que use el request.json() 
+                body: JSON.stringify(datos) //  convierte el objeto datos en una cadena de texto json plana para que el servidor lo pueda entender
             })
-                .then(res => res.json())
+                //el then son promesas, permite ejecutar codigo despues de que la peticion se haya completado  
+                .then(res => res.json()) // convierte la respuesta del servidor(flujo de bytes, aunque en main.py nos devuelva un json, asi viaja por el servidor) en un objeto JSON
                 .then(json => {
-                    if (json.ok) {
+                    if (json.ok) { // si la respuesta es ok
                         // Éxito: cerramos el modal, reseteamos el form y recargamos la tabla
                         modal.close();
                         form.reset();
                         // Limpiamos la tabla y volvemos a cargar los datos desde el servidor
                         document.getElementById("listado-leads").innerHTML =
                             document.getElementById("leads-plantilla").outerHTML;
-                        $.getJSON("leads").done(function (json2) {
-                            let listado = document.getElementById("listado-leads");
-                            let plantilla = document.getElementById("leads-plantilla");
-                            json2.forEach((element) => {
-                                let clon = plantilla.cloneNode(true);
-                                clon.id = "";
-                                clon.style.display = "table-row";
-                                clon.dataset.idLead = element.id_lead; // <--- Solución: faltaba esta línea
 
+                        //outerHTML nos permite obtener el molde/estructura (en este caso una etiqueta table) del elemento
+                        //para poder recargar la tabla, primero vaciamos el contenedor y luego le insertamos la plantilla
+                        //es decir, coge leads-plantilla, mantiene su molde y lo inserta en el contenedor listado-leads, asi no se duplican datos
+                        $.getJSON("leads").done(function (json2) {
+                            //se envia la peticion a leads y cuando llega, se ejecuta esta funcion con json2 como parametro(los datos de los leads que envia el servidor)
+                            let listado = document.getElementById("listado-leads"); //obtenemos el contenedor donde vamos a insertar los datos
+                            let plantilla = document.getElementById("leads-plantilla"); //obtenemos el molde de la tabla
+                            json2.forEach((element) => {
+                                let clon = plantilla.cloneNode(true); //hace una copia del molde(sus tr, td, span...)
+                                clon.id = ""; //le quitamos el id al clon porque el id es unico
+                                clon.style.display = "table-row"; //ponemos la fila visible porque la plantilla estaba oculta para que no se viese
+                                clon.dataset.idLead = element.id_lead; //le asignamos el id del lead al clon porque el id es unico y es el que usa el boton de editar para identificar al lead
+                                //ahora pasamos los datos del json al clon
                                 clon.querySelector(".id-lead").textContent = element.id_lead;
                                 clon.querySelector(".nombre-lead").textContent = element.nombre;
                                 clon.querySelector(".empresa-lead").textContent = element.empresa;
@@ -393,14 +387,18 @@
         // ===== Lógica del botón ELIMINAR (papelera) =====
         document.getElementById("listado-leads").addEventListener("click", function (e) {
             const btnEliminar = e.target.closest(".btn-eliminar");
-            if (!btnEliminar) return;
+            if (!btnEliminar) return; // Si no han pulsado el botón de la papelera, ignoramos el clic
 
-            const fila = btnEliminar.closest("tr");
-            const idLead = fila.dataset.idLead;
-            const nombre = fila.querySelector(".nombre-lead").textContent;
+            const fila = btnEliminar.closest("tr"); // Buscamos la fila (<tr>) más cercana al botón pulsado
+            const idLead = fila.dataset.idLead; //cogemos el id del lead que le asignamos antes con dataset.idlead
+            const nombre = fila.querySelector(".nombre-lead").textContent; //cogemos el nombre del lead para mostrarlo en el mensaje de confirmacion
 
             // Confirmación antes de eliminar
             if (!confirm(`¿Seguro que quieres eliminar el lead "${nombre}"?\nEsta acción no se puede deshacer.`)) return;
+            // si no se confirma la eliminacion, se ignora el clic
+
+            //luego se envia la peticion a la ruta /leads/eliminar/{idLead} con el metodo delete
+            // con ${idLead} le pasamos el id del lead que queremos eliminar
 
             fetch(`/leads/eliminar/${idLead}`, {
                 method: "DELETE"
@@ -408,7 +406,7 @@
                 .then(res => res.json())
                 .then(json => {
                     if (json.ok) {
-                        // Eliminamos la fila de la tabla sin recargar
+                        // Eliminamos la fila de la tabla sin recargar la web
                         fila.remove();
                     } else {
                         alert("❌ " + (json.error || "No se pudo eliminar el lead."));
