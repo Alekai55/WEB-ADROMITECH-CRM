@@ -52,12 +52,13 @@
         }
     </style>
 </head>
-
+<!-- min-h screen hace que el body ocupe toda la pantalla aunque no haya contenido -->
 <body class="min-h-screen flex flex-col" style="background-color: #f3f4f6;">
     <!-- Con jinja2 que es el motor de plantillas que usa flask, puedo incluir el menu.html en todos los html de la aplicacion -->
     {% include 'menu.html' %}
 
     <main class="flex-grow p-4 md:p-8">
+        <!-- con flex-grow se adapta a la pantalla si no hay mucho contenido, se estira y asi el footer queda abajo -->
 
         <!-- Cabecera -->
         <div class="mb-8">
@@ -136,10 +137,11 @@
             <div class="mb-6">
                 <h2 class="titulo-seccion w-fit">Nuestros productos</h2>
             </div>
+            <!-- con overflow-hidden hacemos que las esquinas de la imagen se adapten al contenedor y no sobresalgan-->
             <div
-                class="relative h-94 overflow-hidden rounded-xl max-w-2xl mx-auto mt-10 flex items-center justify-center"
+                class="w-full rounded-xl max-w-2xl mx-auto mt-10 overflow-hidden"
                 style="box-shadow: 0 10px 25px -5px var(--color-acento-glow);">
-                <img id="carrusel" class="w-full h-full object-contain transition-opacity duration-700"
+                <img id="carrusel" class="w-full h-auto block"
                     src="/static/assets/img/imagen1.png" alt="Carrusel">
             </div>
 
