@@ -1,0 +1,100 @@
+================================================================================
+  repositorio.bd
+================================================================================
+
+    def insertar_lead(
+        nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto
+    ):
+        """Inserta un nuevo lead en la base de datos."""
+        conexion = crear_conexion()
+        if conexion is None:
+            return False
+
+        try:
+            cursor = conexion.cursor()
+            sql = """
+                INSERT INTO leads (nombre, empresa, telefono, email, fuente_captacion, estado, fecha_contacto)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+            valores = (
+                nombre,
+                empresa,
+                telefono,
+                email,
+                fuente_captacion,
+                estado,
+                fecha_contacto,
+            )
+            cursor.execute(sql, valores)
+            conexion.commit()
+            return True
+        except Exception as e:
+            print(f"Error al insertar lead: {e}")
+            return False
+        finally:
+            if "cursor" in locals() and cursor is not None:
+                cursor.close()
+            if conexion is not None and conexion.is_connected():
+                conexion.close()
+
+
+================================================================================
+  main.py
+================================================================================
+
+    @app.route("/leads/nuevo", methods=["POST"])
+    def nuevo_lead():
+        """Recibe los datos del formulario modal y los inserta en la BD."""
+        datos = request.get_json()
+        exito = insertar_lead(
+            nombre=datos.get("nombre"),
+            empresa=datos.get("empresa"),
+            telefono=datos.get("telefono"),
+            email=datos.get("email"),
+            fuente_captacion=datos.get("fuente_captacion"),
+            estado=datos.get("estado"),
+            fecha_contacto=datos.get("fecha_contacto"),
+        )
+        if exito:
+            return jsonify({"ok": True}), 201
+        else:
+            return (
+                jsonify({"ok": False, "error": "Error al insertar en la base de datos"}),
+                500,
+            )
+
+
+================================================================================
+  leads.html
+================================================================================
+
+        $.getJSON("leads").done(function (json) {
+            let listado = document.getElementById("listado-leads");
+            let plantilla = document.getElementById("leads-plantilla");
+
+            json.forEach((element) => {
+                let clon = plantilla.cloneNode(true);
+                clon.id = "";
+                clon.style.display = "table-row";
+                clon.dataset.idLead = element.id_lead;
+
+                clon.querySelector(".id-lead").textContent = element.id_lead;
+                clon.querySelector(".nombre-lead").textContent = element.nombre;
+                clon.querySelector(".empresa-lead").textContent = element.empresa;
+                clon.querySelector(".telefono-lead").textContent = element.telefono;
+                clon.querySelector(".email-lead").textContent = element.email;
+                clon.querySelector(".captacion-lead").textContent = element.fuente_captacion;
+                clon.querySelector(".estado-lead").textContent = element.estado;
+                clon.querySelector(".fecha-de-contacto-lead").textContent = element.fecha_contacto;
+
+                let estadoSpan = clon.querySelector(".estado-cliente");
+                estadoSpan.textContent = element.estado.toUpperCase();
+                if (element.estado === 'activo') {
+                    estadoSpan.classList.add("bg-green-100", "text-green-800");
+                } else {
+                    estadoSpan.classList.add("bg-red-100", "text-red-800");
+                }
+
+                listado.appendChild(clon);
+            });
+        });
