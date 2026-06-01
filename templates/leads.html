@@ -130,7 +130,7 @@
                         <!-- DaisyUI: input le da formato al input-->
                         <input id="f-nombre" type="text" placeholder="Nombre completo"
                             class="input input-bordered w-full" required
-                            style="border-color: var(--color-oscuro-suave); focus-outline: none;">
+                            style="border-color: var(--color-oscuro-suave);">
                     </div>
                     <!-- apartado de la empresa para poner su nombre | DaisyUI: form-control -->
                     <div class="form-control">
@@ -289,6 +289,8 @@
                 // Añadimos el clon ya relleno al contenedor principal
                 listado.appendChild(clon);
             });
+        }).fail(function () {
+            console.error("Error al cargar los leads. Asegúrate de que el endpoint devuelve un JSON válido.");
         });
 
         // ===== Introducir Lógica del Modal (Formulario de Tailwind) =====
