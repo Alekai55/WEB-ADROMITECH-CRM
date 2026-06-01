@@ -21,7 +21,7 @@
 /*keyframes: define el estado de un elemento que cambia entre diferentes puntos de tiempo 0-50-100%*/
 
 
-/* 1. Fondo que pulsa entre el morado oscuro y el verde neón */
+/*  Fondo que pulsa entre el morado oscuro y el verde neón */
 @keyframes pulso-marca {
     0% {
         background-color: var(--color-oscuro);
@@ -36,22 +36,9 @@
     }
 }
 
-/* 2. Texto que cambia de color de blanco al verde neón */
-@keyframes brillo-texto {
-    0% {
-        color: var(--color-blanco);
-    }
 
-    50% {
-        color: var(--color-acento);
-    }
 
-    100% {
-        color: var(--color-blanco);
-    }
-}
-
-/* 3. Borde que hace glow con el verde neón */
+/*  Borde que hace glow con el verde neón */
 /* genera un brillo alrededor del elemento */
 @keyframes glow-borde {
     0% {
@@ -67,49 +54,9 @@
     }
 }
 
-/* 4. Gradiente animado de fondo de pantalla completo */
-/* fondo degradado animado que cambia de color */
-@keyframes gradiente-fondo {
-    0% {
-        background-position: 0% 50%;
-    }
 
-    50% {
-        background-position: 100% 50%;
-    }
 
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* 5. Parpadeo suave para badges o alertas */
-@keyframes parpadeo {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.55;
-    }
-}
-
-/* 6. Entrada desde abajo (fade-in deslizante) */
-@keyframes entrada-abajo {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 7. Text-shadow neón pulsante para títulos de sección */
+/* Text-shadow neón pulsante para títulos de sección */
 @keyframes neon-titulo {
     0% {
         text-shadow: 0 0 0px transparent;
@@ -157,10 +104,7 @@
     animation: pulso-marca 4s ease-in-out infinite;
 } /* 4 segundos, sale y entra suavemente, acelera y vuelve a suave, se repiten infinitas veces */
 
-/* Aplica el brillo de texto verde */
-.texto-brillo {
-    animation: brillo-texto 3s ease-in-out infinite;
-}
+
 
 /* Aplica el glow de borde verde neón */
 .glow-verde {
@@ -168,26 +112,7 @@
     border: 1px solid var(--color-acento);
 }
 
-/* Fondo degradado animado (útil para hero sections o headers) */
-.fondo-gradiente-animado {
-    background: linear-gradient(135deg,
-            var(--color-oscuro),
-            var(--color-oscuro-medio),
-            var(--color-acento-suave),
-            var(--color-oscuro));
-    background-size: 300% 300%;
-    animation: gradiente-fondo 8s ease infinite;
-}
 
-/* Badge / etiqueta parpadeante */
-.badge-parpadeo {
-    animation: parpadeo 1.8s ease-in-out infinite;
-}
-
-/* Elemento que entra desde abajo al cargar */
-.animar-entrada {
-    animation: entrada-abajo 0.5s ease both;
-}
 
 
 
